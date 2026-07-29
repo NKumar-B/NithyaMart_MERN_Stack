@@ -1,0 +1,14 @@
+{
+  "name": "elysian-luxe-cosmetics",
+  "version": "1.0.0",
+  "description": "Premium luxury cosmetics store frontend website served via Node/Express",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "author": "MERN Stack Team 4",
+  "license": "ISC"
+}
