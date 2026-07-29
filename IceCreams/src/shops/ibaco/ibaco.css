@@ -1,0 +1,474 @@
+/* ==========================================================================
+   Ibaco Ice Cream Shop — Classic Parlour Theme
+   Palette: cream, deep burgundy/maroon, gold accent
+   ========================================================================== */
+
+.ibaco-home,
+.ibaco-menu,
+.ibaco-item-detail,
+.ibaco-cart,
+.ibaco-checkout,
+.ibaco-admin {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: #3b1f1f;
+  background: #fffaf4;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  letter-spacing: 0.5px;
+}
+
+/* ---------------- Hero Banner ---------------- */
+.ibaco-home {
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.ibaco-banner {
+  background-size: cover;
+  background-position: center;
+  color: #fff8ef;
+  padding: 110px 20px 90px;
+  border-bottom: 4px double #d4af7a;
+}
+
+.ibaco-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e9c98f;
+  margin-bottom: 14px;
+  font-family: 'Georgia', serif;
+}
+
+.ibaco-banner h1 {
+  font-size: 4rem;
+  margin: 0;
+  font-weight: normal;
+  letter-spacing: 4px;
+}
+
+.ibaco-banner p {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin: 14px 0 26px;
+  color: #f3e6d4;
+}
+
+.ibaco-btn {
+  display: inline-block;
+  background: #7a1f2b;
+  color: #fff8ef;
+  padding: 12px 32px;
+  border: 1px solid #d4af7a;
+  border-radius: 2px;
+  font-weight: normal;
+  letter-spacing: 1px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.ibaco-btn:hover {
+  background: #5e1620;
+  transform: translateY(-1px);
+}
+
+.ibaco-btn.small {
+  padding: 7px 18px;
+  font-size: 0.85rem;
+}
+
+.ibaco-btn:disabled {
+  background: #cbb9a8;
+  border-color: #cbb9a8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------------- Section headings ---------------- */
+.ibaco-section-heading {
+  margin: 50px 0 30px;
+}
+
+.ibaco-section-heading h2 {
+  font-size: 2rem;
+  color: #7a1f2b;
+  margin-bottom: 6px;
+  position: relative;
+  display: inline-block;
+}
+
+.ibaco-section-heading h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: #d4af7a;
+  margin: 10px auto 0;
+}
+
+.ibaco-section-heading p {
+  color: #7a6a5c;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* ---------------- Category tiles ---------------- */
+.ibaco-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.ibaco-category-card {
+  width: 190px;
+  text-decoration: none;
+  color: #3b1f1f;
+  background: #fff;
+  border: 1px solid #e8d9c5;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(122, 31, 43, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ibaco-category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(122, 31, 43, 0.18);
+}
+
+.ibaco-category-card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 2px solid #d4af7a;
+}
+
+.ibaco-category-card span {
+  display: block;
+  padding: 14px 0;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+/* ---------------- Mini cart bar ---------------- */
+.ibaco-minicart-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #7a1f2b;
+  color: #fff8ef;
+  padding: 12px 22px;
+  border-radius: 4px;
+  max-width: 1100px;
+  margin: 0 auto 26px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(122, 31, 43, 0.25);
+  font-size: 0.95rem;
+}
+
+.ibaco-minicart-total {
+  font-weight: bold;
+  color: #f3d9a4;
+}
+
+.ibaco-minicart-bar .ibaco-btn.small {
+  background: #fff8ef;
+  color: #7a1f2b;
+  border: none;
+}
+
+.ibaco-item-detail-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 40px 0;
+}
+
+.ibaco-item-detail-wrap .ibaco-minicart-bar {
+  margin-bottom: 0;
+}
+
+/* ---------------- Menu page ---------------- */
+.ibaco-menu {
+  padding: 40px 20px 60px;
+}
+
+.ibaco-menu h2 {
+  text-align: center;
+  color: #7a1f2b;
+  font-size: 2.2rem;
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+
+.ibaco-filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+.ibaco-filter-btn {
+  border: 1px solid #7a1f2b;
+  background: #fff;
+  color: #7a1f2b;
+  padding: 7px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.ibaco-filter-btn.active,
+.ibaco-filter-btn:hover {
+  background: #7a1f2b;
+  color: #fff8ef;
+}
+
+.ibaco-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 26px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ibaco-card {
+  background: #fff;
+  border: 1px solid #e8d9c5;
+  border-radius: 4px;
+  padding: 0 0 16px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(122, 31, 43, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ibaco-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 22px rgba(122, 31, 43, 0.15);
+}
+
+.ibaco-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ibaco-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-bottom: 2px solid #d4af7a;
+  margin-bottom: 12px;
+}
+
+.ibaco-card h3 {
+  font-size: 1.05rem;
+  margin: 0 14px 4px;
+  font-weight: normal;
+}
+
+.ibaco-size {
+  color: #8a7666;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.ibaco-price {
+  font-weight: bold;
+  color: #7a1f2b;
+  font-size: 1.15rem;
+  margin: 6px 0 12px;
+}
+
+/* ---------------- Item detail ---------------- */
+.ibaco-item-detail {
+  display: flex;
+  gap: 40px;
+  padding: 30px 0 50px;
+  flex-wrap: wrap;
+}
+
+.ibaco-item-detail img {
+  width: 380px;
+  max-width: 100%;
+  border-radius: 4px;
+  border: 1px solid #e8d9c5;
+  box-shadow: 0 8px 24px rgba(122, 31, 43, 0.12);
+}
+
+.ibaco-item-info h2 {
+  font-size: 1.8rem;
+  color: #7a1f2b;
+  font-weight: normal;
+  margin-bottom: 6px;
+}
+
+.ibaco-item-info p {
+  line-height: 1.6;
+  color: #4a3a30;
+}
+
+/* ---------------- Cart / Checkout ---------------- */
+.ibaco-cart, .ibaco-checkout, .ibaco-admin {
+  padding: 40px 30px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.ibaco-cart h2, .ibaco-checkout h2, .ibaco-admin h2 {
+  color: #7a1f2b;
+  font-weight: normal;
+  border-bottom: 2px double #d4af7a;
+  padding-bottom: 10px;
+}
+
+.ibaco-cart-row {
+  display: flex;
+  gap: 18px;
+  border-bottom: 1px solid #eadfd0;
+  padding: 16px 0;
+  align-items: center;
+}
+
+.ibaco-cart-row img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #e8d9c5;
+}
+
+.ibaco-cart-row-info h4 {
+  margin: 0 0 4px;
+  font-weight: normal;
+}
+
+.ibaco-qty-controls button {
+  margin: 0 6px 0 0;
+  padding: 3px 12px;
+  border-radius: 4px;
+  border: 1px solid #7a1f2b;
+  background: #fff;
+  color: #7a1f2b;
+  cursor: pointer;
+}
+
+.ibaco-qty-controls span {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.ibaco-remove {
+  color: #a13a3a;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 14px;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.ibaco-cart-total {
+  text-align: right;
+  margin-top: 26px;
+}
+
+.ibaco-cart-total h3 {
+  color: #7a1f2b;
+  font-weight: normal;
+}
+
+.ibaco-cart-empty {
+  text-align: center;
+  padding: 90px 20px;
+  font-style: italic;
+  color: #7a6a5c;
+}
+
+.ibaco-checkout-success {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.ibaco-checkout-success h2 {
+  color: #7a1f2b;
+}
+
+.ibaco-checkout ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ibaco-checkout li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eadfd0;
+}
+
+/* ---------------- Admin ---------------- */
+.ibaco-admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0 36px;
+  background: #fff;
+  padding: 22px;
+  border: 1px solid #e8d9c5;
+  border-radius: 4px;
+}
+
+.ibaco-admin-form input,
+.ibaco-admin-form select,
+.ibaco-admin-form textarea {
+  padding: 9px 12px;
+  border-radius: 3px;
+  border: 1px solid #d8c6b0;
+  font-family: 'Georgia', serif;
+}
+
+.ibaco-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.ibaco-admin-table th {
+  background: #7a1f2b;
+  color: #fff8ef;
+  text-align: left;
+  padding: 10px;
+  font-weight: normal;
+}
+
+.ibaco-admin-table td {
+  border-bottom: 1px solid #eadfd0;
+  padding: 10px;
+}
+
+.ibaco-admin-table button {
+  margin-right: 10px;
+  cursor: pointer;
+  border: 1px solid #7a1f2b;
+  background: #fff;
+  color: #7a1f2b;
+  border-radius: 3px;
+  padding: 4px 10px;
+}
+
+.ibaco-admin-table button:hover {
+  background: #7a1f2b;
+  color: #fff8ef;
+}
