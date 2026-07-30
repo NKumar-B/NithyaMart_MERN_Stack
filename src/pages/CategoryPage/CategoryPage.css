@@ -1,0 +1,111 @@
+.category-page {
+  padding: 140px 0 80px;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text-dark);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.category-header h1 {
+  font-size: clamp(2.4rem, 2.2vw, 3.2rem);
+  margin: 0;
+  color: var(--primary);
+}
+
+.category-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 32px 70px rgba(0, 0, 0, 0.12);
+}
+
+.product-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card h3 {
+  margin: 18px;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: var(--text-dark);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  color: var(--secondary);
+  background: rgba(248, 245, 240, 0.18);
+  padding: 12px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.category-empty {
+  padding: 60px;
+  background: #fff;
+  border-radius: 28px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+}
+
+.category-empty h1 {
+  margin-bottom: 24px;
+  color: var(--primary);
+}
+
+@media (max-width: 1200px) {
+  .category-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .category-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .category-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .category-page {
+    padding: 100px 0 40px;
+  }
+
+  .category-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card img {
+    height: 260px;
+  }
+}

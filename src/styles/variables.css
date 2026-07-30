@@ -1,0 +1,34 @@
+:root {
+
+    /* Luxury Colors */
+
+    --primary: #111111;
+    --secondary: #F8F5F0;
+    --accent: #C6A96B;
+
+    --background: #FCFBF8;
+    --card: #FFFFFF;
+
+    --text-dark: #222222;
+    --text-light: #666666;
+
+    --border: #DDD6C8;
+
+    --hover: #B8924F;
+
+    --shadow: rgba(0,0,0,0.12);
+
+    /* Radius */
+
+    --radius-small: 8px;
+    --radius-medium: 14px;
+    --radius-large: 20px;
+
+    /* Container */
+
+    --container-width: 1280px;
+
+    /* Transition */
+
+    --transition: all .3s ease;
+}

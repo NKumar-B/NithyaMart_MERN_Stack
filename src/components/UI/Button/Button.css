@@ -1,0 +1,21 @@
+.btn{
+
+    padding:16px 34px;
+
+    background:var(--primary);
+
+    color:white;
+
+    border-radius:50px;
+
+    transition:.3s;
+
+    font-weight:600;
+
+}
+
+.btn:hover{
+
+    background:var(--hover);
+
+}

@@ -1,0 +1,84 @@
+.hero{
+position:relative;
+min-height:100vh;
+display:flex;
+align-items:center;
+background:linear-gradient(135deg,#111,#222);
+overflow:hidden;
+padding-top:90px;
+}
+.hero-overlay{
+position:absolute;inset:0;
+background:linear-gradient(to right,rgba(17,17,17,.92),rgba(17,17,17,.65));
+}
+.hero-container{
+position:relative;
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:60px;
+align-items:center;
+}
+.hero-content{color:#fff;animation:fadeUp .9s ease;}
+.hero-tag{
+display:inline-block;
+padding:8px 18px;
+border:1px solid rgba(198,169,107,.5);
+border-radius:30px;
+color:var(--accent);
+margin-bottom:20px;
+}
+.hero h1{font-size:4.2rem;line-height:1.1;margin-bottom:24px;color:#fff;}
+.hero p{max-width:620px;margin-bottom:34px;color:#ddd;}
+.hero-buttons{display:flex;gap:18px;flex-wrap:wrap;}
+.outline-btn{
+padding:16px 34px;border:1px solid var(--accent);
+border-radius:40px;color:#fff;transition:.3s;
+}
+.outline-btn:hover{background:var(--accent);}
+.hero-stats{
+display:flex;gap:50px;margin-top:50px;flex-wrap:wrap;
+}
+.hero-stats h3{color:var(--accent);margin-bottom:8px;}
+.hero-visual{position:relative;}
+.hero-image .image-placeholder{height:520px;}
+.floating-card{
+position:absolute;
+width:220px;
+padding:16px;
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,.15);
+border-radius:18px;
+color:#fff;
+animation:float 4s ease-in-out infinite;
+}
+.floating-card .image-placeholder{height:120px;margin-bottom:12px;}
+.top-card{top:-20px;right:-20px;}
+.bottom-card{bottom:-20px;left:-20px;animation-delay:1.5s;}
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
+}
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+}
+@media(max-width:992px){
+.hero-container{grid-template-columns:1fr;}
+.hero h1{font-size:3.2rem;}
+.hero-visual{margin-top:40px;}
+.top-card{right:10px;}
+.bottom-card{left:10px;}
+}
+@media(max-width:576px){
+.hero{padding-top:80px;}
+.hero h1{font-size:2.4rem;}
+.hero-buttons{flex-direction:column;}
+.hero-stats{gap:25px;}
+.floating-card{
+position:relative;
+width:100%;
+left:auto;right:auto;top:auto;bottom:auto;
+margin-top:20px;
+}
+}

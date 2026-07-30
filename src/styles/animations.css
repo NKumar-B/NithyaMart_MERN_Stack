@@ -1,0 +1,474 @@
+/* ==========================================
+   GLOBAL TRANSITIONS
+========================================== */
+
+* {
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        transform 0.35s ease,
+        opacity 0.35s ease;
+}
+
+/* ==========================================
+   FADE ANIMATIONS
+========================================== */
+
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+.fade-up {
+    animation: fadeUp 0.9s ease forwards;
+}
+
+.fade-down {
+    animation: fadeDown 0.9s ease forwards;
+}
+
+.fade-left {
+    animation: fadeLeft 0.9s ease forwards;
+}
+
+.fade-right {
+    animation: fadeRight 0.9s ease forwards;
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes fadeDown {
+
+    from {
+        opacity: 0;
+        transform: translateY(-60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes fadeLeft {
+
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+@keyframes fadeRight {
+
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+/* ==========================================
+   ZOOM
+========================================== */
+
+.zoom-in {
+    animation: zoomIn 0.8s ease forwards;
+}
+
+.zoom-out {
+    animation: zoomOut 0.8s ease forwards;
+}
+
+@keyframes zoomIn {
+
+    from {
+        opacity: 0;
+        transform: scale(.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+@keyframes zoomOut {
+
+    from {
+        transform: scale(1.15);
+    }
+
+    to {
+        transform: scale(1);
+    }
+
+}
+
+/* ==========================================
+   FLOATING
+========================================== */
+
+.float {
+    animation: floating 4s ease-in-out infinite;
+}
+
+@keyframes floating {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+/* ==========================================
+   GLOW EFFECT
+========================================== */
+
+.glow:hover {
+
+    box-shadow:
+        0 0 20px rgba(198,169,107,.35),
+        0 0 40px rgba(198,169,107,.25);
+
+}
+
+/* ==========================================
+   CARD HOVER
+========================================== */
+
+.card-hover:hover {
+
+    transform:
+        translateY(-10px)
+        scale(1.02);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.18);
+
+}
+
+/* ==========================================
+   CARD TILT
+========================================== */
+
+.card-tilt {
+
+    transform-style: preserve-3d;
+
+}
+
+.card-tilt:hover {
+
+    transform:
+        perspective(1200px)
+        rotateX(4deg)
+        rotateY(-4deg)
+        translateY(-10px);
+
+}
+
+/* ==========================================
+   IMAGE ZOOM
+========================================== */
+
+.image-zoom {
+
+    overflow: hidden;
+
+}
+
+.image-zoom img,
+.image-zoom .image-placeholder {
+
+    transition: transform .6s ease;
+
+}
+
+.image-zoom:hover img,
+.image-zoom:hover .image-placeholder {
+
+    transform: scale(1.08);
+
+}
+
+/* ==========================================
+   BUTTON RIPPLE
+========================================== */
+
+.ripple-btn {
+
+    position: relative;
+    overflow: hidden;
+
+}
+
+.ripple-btn::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 15px;
+    height: 15px;
+
+    background: rgba(255,255,255,.5);
+
+    border-radius: 50%;
+
+    transform: scale(0);
+
+    opacity: 0;
+
+    left: 50%;
+    top: 50%;
+
+    pointer-events: none;
+
+}
+
+.ripple-btn:hover::after {
+
+    animation: ripple .7s ease;
+
+}
+
+@keyframes ripple {
+
+    from {
+
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+
+        opacity: 1;
+
+    }
+
+    to {
+
+        transform:
+            translate(-50%, -50%)
+            scale(18);
+
+        opacity: 0;
+
+    }
+
+}
+
+/* ==========================================
+   GLASS REFLECTION
+========================================== */
+
+.glass {
+
+    position: relative;
+    overflow: hidden;
+
+}
+
+.glass::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 60%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,.35),
+            transparent
+        );
+
+}
+
+.glass:hover::before {
+
+    animation: shine 1.2s ease;
+
+}
+
+@keyframes shine {
+
+    to {
+
+        left: 150%;
+
+    }
+
+}
+
+/* ==========================================
+   BUTTON HOVER
+========================================== */
+
+.btn-hover:hover {
+
+    transform:
+        translateY(-4px);
+
+}
+
+/* ==========================================
+   NAVBAR
+========================================== */
+
+.navbar {
+
+    transition:
+        background .4s ease,
+        padding .4s ease,
+        box-shadow .4s ease;
+
+}
+
+/* ==========================================
+   SECTION REVEAL
+========================================== */
+
+.reveal {
+
+    opacity: 0;
+
+    transform: translateY(60px);
+
+    animation:
+        reveal 1s ease forwards;
+
+}
+
+@keyframes reveal {
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   LOADER
+========================================== */
+
+.loader {
+
+    width: 60px;
+    height: 60px;
+
+    border: 6px solid rgba(198,169,107,.2);
+
+    border-top-color: var(--accent);
+
+    border-radius: 50%;
+
+    animation: spin 1s linear infinite;
+
+}
+
+@keyframes spin {
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+/* ==========================================
+   SCROLL INDICATOR
+========================================== */
+
+.scroll-bounce {
+
+    animation:
+        scrollBounce 2s infinite;
+
+}
+
+@keyframes scrollBounce {
+
+    0%,
+    100% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(10px);
+
+    }
+
+}
+
+/* ==========================================
+   STAGGER DELAYS
+========================================== */
+
+.delay-1 { animation-delay: .1s; }
+
+.delay-2 { animation-delay: .2s; }
+
+.delay-3 { animation-delay: .3s; }
+
+.delay-4 { animation-delay: .4s; }
+
+.delay-5 { animation-delay: .5s; }

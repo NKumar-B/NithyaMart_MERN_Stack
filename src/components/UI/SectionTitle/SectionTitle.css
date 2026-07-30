@@ -1,0 +1,25 @@
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:60px;
+
+}
+
+.section-title p{
+
+    color:var(--accent);
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    margin-bottom:10px;
+
+}
+
+.section-title h2{
+
+    color:var(--primary);
+
+}

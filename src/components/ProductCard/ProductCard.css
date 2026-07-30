@@ -1,0 +1,481 @@
+/* =====================================
+   PRODUCT CARD - LUXURY DESIGN
+===================================== */
+
+
+.product-card {
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  position: relative;
+
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+
+  transition: all 0.4s ease;
+
+  border: 1px solid rgba(212,175,55,0.15);
+
+}
+
+
+
+/* Card Hover */
+
+.product-card:hover {
+
+  transform: translateY(-12px);
+
+  box-shadow:
+  0 25px 60px rgba(0,0,0,0.15);
+
+}
+
+
+
+/* =====================================
+   IMAGE SECTION
+===================================== */
+
+
+.product-image {
+
+  height: 320px;
+
+  background:
+  linear-gradient(
+    145deg,
+    #f8f3e7,
+    #ffffff
+  );
+
+  position: relative;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+
+}
+
+.product-image img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+
+
+/* Image hover effect */
+
+.product-image::after {
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+  linear-gradient(
+    120deg,
+    transparent,
+    rgba(212,175,55,0.15),
+    transparent
+  );
+
+  opacity:0;
+
+  transition:0.4s;
+  z-index:1;
+
+}
+
+
+.product-card:hover .product-image::after {
+
+  opacity:1;
+
+}
+
+
+
+/* =====================================
+   BADGE
+===================================== */
+
+
+.product-badge {
+
+  position:absolute;
+
+  top:18px;
+
+  left:18px;
+
+  z-index:2;
+
+  padding:7px 14px;
+
+  border-radius:30px;
+
+  background:#111;
+
+  color:#d4af37;
+
+  font-size:12px;
+
+  font-weight:600;
+
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+
+}
+
+
+
+/* =====================================
+   WISHLIST BUTTON
+===================================== */
+
+
+.wishlist-btn {
+
+  position:absolute;
+
+  top:18px;
+
+  right:18px;
+
+  width:42px;
+
+  height:42px;
+
+  border-radius:50%;
+
+  border:none;
+
+  background:white;
+
+  font-size:24px;
+
+  cursor:pointer;
+
+  color:#333;
+
+  transition:0.3s;
+
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  z-index:3;
+
+}
+
+
+.wishlist-btn:hover {
+
+  background:#111;
+
+  color:#d4af37;
+
+  transform:scale(1.1);
+
+}
+
+
+
+/* =====================================
+   CONTENT
+===================================== */
+
+
+.product-content {
+
+  padding:28px 26px 26px;
+
+}
+
+
+
+/* Brand */
+
+.product-brand {
+
+  font-size:13px;
+
+  color:#b08d28;
+
+  letter-spacing:2px;
+
+  text-transform:uppercase;
+
+  margin-bottom:10px;
+
+  font-weight:600;
+
+}
+
+
+
+/* Product Name */
+
+.product-name {
+
+  font-size:22px;
+
+  color:#171717;
+
+  font-weight:700;
+
+  line-height:1.25;
+
+  margin-bottom:14px;
+
+}
+
+
+
+/* Rating */
+
+
+.product-rating {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  font-size:14px;
+
+  color:#d4af37;
+
+  margin-bottom:18px;
+
+}
+
+
+.product-rating span {
+
+  color:#777;
+
+  margin-left:0;
+
+}
+
+
+
+/* =====================================
+   PRICE SECTION
+===================================== */
+
+
+.price-section {
+
+  display:flex;
+
+  align-items:flex-end;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin-bottom:22px;
+
+}
+
+
+
+.product-price {
+
+  font-size:28px;
+
+  font-weight:800;
+
+  color:#111;
+
+  letter-spacing:-0.02em;
+
+}
+
+
+
+.product-discount {
+
+  background:#f5e8bd;
+
+  color:#8a6a12;
+
+  padding:8px 14px;
+
+  border-radius:24px;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  min-width:74px;
+
+  text-align:center;
+
+}
+
+
+
+/* =====================================
+   BUTTONS
+===================================== */
+
+
+.product-buttons {
+
+  display:flex;
+
+  gap:16px;
+
+  margin-bottom:12px;
+
+}
+
+
+
+.product-buttons button {
+
+  flex:1;
+
+  padding:14px 18px;
+
+  border-radius:12px;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:0.3s ease;
+
+}
+
+
+.product-buttons button:hover {
+  transform: translateY(-1px);
+}
+
+
+
+/* Quick View */
+
+
+.quick-view-btn {
+
+  background:white;
+
+  border:1px solid #111;
+
+  color:#111;
+
+}
+
+
+.quick-view-btn:hover {
+
+  background:#111;
+
+  color:white;
+
+}
+
+
+
+/* Cart */
+
+
+.cart-btn {
+
+  background:#111;
+
+  color:white;
+
+  border:1px solid #111;
+
+}
+
+
+.cart-btn:hover {
+
+  background:#d4af37;
+
+  border-color:#d4af37;
+
+  color:#111;
+
+}
+
+
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+
+@media(max-width:768px){
+
+
+.product-image{
+
+  height:260px;
+
+}
+
+
+.product-content{
+
+  padding:22px;
+
+}
+
+
+.product-name{
+
+  font-size:18px;
+
+}
+
+
+.product-price{
+
+  font-size:22px;
+
+}
+
+
+}
+
+
+
+@media(max-width:480px){
+
+
+.product-buttons{
+
+  flex-direction:column;
+
+}
+
+
+.product-image{
+
+  height:240px;
+
+}
+
+
+}
