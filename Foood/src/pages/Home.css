@@ -1,0 +1,46 @@
+.section-tinted {
+  background: linear-gradient(180deg, rgba(255, 107, 53, 0.04) 0%, var(--color-bg) 100%);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.food-grid-wide {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1080px) {
+  .food-grid, .food-grid-wide, .review-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+  .food-grid, .food-grid-wide, .review-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .food-grid, .food-grid-wide, .review-grid {
+    grid-template-columns: 1fr;
+  }
+}

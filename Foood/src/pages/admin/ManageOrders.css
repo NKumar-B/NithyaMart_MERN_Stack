@@ -1,0 +1,17 @@
+.muted-sub {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.status-select {
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 6px 12px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.status-select.status-pending { background: var(--color-warning-bg); color: var(--color-warning); }
+.status-select.status-preparing { background: var(--color-info-bg); color: var(--color-info); }
+.status-select.status-ready { background: #f3e5f5; color: #6a1b9a; }
+.status-select.status-completed { background: var(--color-success-bg); color: var(--color-success); }
