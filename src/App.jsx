@@ -249,32 +249,94 @@ function App() {
             </p>
           </div>
 
-          {/* Carousel Section */}
-          <section className="carousel-container">
-            {carouselSlides.map((slide, index) => (
-              <div 
-                key={slide.id}
-                className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
-              >
-                <img 
-                  src={slide.image} 
-                  alt={slide.title} 
-                  className="carousel-image-bg" 
-                />
-                <div className="carousel-overlay"></div>
-                <div className="carousel-content">
-                  <span className="carousel-tag">Featured Module</span>
-                  <h2 className="carousel-title">{slide.title}</h2>
-                  <p className="carousel-subtitle">{slide.subtitle}</p>
-                  <button 
-                    className="carousel-btn"
-                    onClick={() => loadProject(projects.find(p => p.id === slide.id))}
+          {/* Carousel Section (Inline styled layout to guarantee height & display visibility) */}
+          <section 
+            className="carousel-container"
+            style={{ 
+              position: 'relative', 
+              width: '100%', 
+              maxWidth: '1200px', 
+              height: '380px', 
+              borderRadius: '24px', 
+              border: '1px solid rgba(255, 255, 255, 0.06)', 
+              overflow: 'hidden', 
+              marginBottom: '3.5rem', 
+              background: '#0d0d15', 
+              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.4)',
+              display: 'block'
+            }}
+          >
+            {carouselSlides.map((slide, index) => {
+              const isActive = index === currentSlide;
+              return (
+                <div 
+                  key={slide.id}
+                  className={`carousel-slide ${isActive ? 'active' : ''}`}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    opacity: isActive ? 1 : 0,
+                    zIndex: isActive ? 2 : 1,
+                    transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                    display: 'flex',
+                    alignItems: 'flex-end'
+                  }}
+                >
+                  <img 
+                    src={slide.image} 
+                    alt={slide.title} 
+                    className="carousel-image-bg" 
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      filter: 'brightness(0.35) contrast(1.05)'
+                    }}
+                  />
+                  <div 
+                    className="carousel-overlay"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(to top, rgba(13, 14, 21, 0.95) 15%, rgba(13, 14, 21, 0.2) 100%)',
+                      zIndex: 2
+                    }}
+                  ></div>
+                  <div 
+                    className="carousel-content"
+                    style={{
+                      position: 'relative',
+                      zIndex: 3,
+                      padding: '3rem 4rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      gap: '0.5rem',
+                      width: '100%'
+                    }}
                   >
-                    {slide.btnText}
-                  </button>
+                    <span className="carousel-tag">Featured Module</span>
+                    <h2 className="carousel-title">{slide.title}</h2>
+                    <p className="carousel-subtitle">{slide.subtitle}</p>
+                    <button 
+                      className="carousel-btn"
+                      onClick={() => loadProject(projects.find(p => p.id === slide.id))}
+                    >
+                      {slide.btnText}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
             
             {/* Carousel Navigation Arrows */}
             <button className="carousel-arrow prev" onClick={handlePrevSlide}>‹</button>
