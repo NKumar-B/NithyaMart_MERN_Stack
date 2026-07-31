@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import IbacoShopRoutes from './shops/ibaco'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/shops/ibaco/*" element={<IbacoShopRoutes />} />
-        <Route path="/" element={<div>Welcome to Ibaco Ice Cream Shop! <a href="/shops/ibaco">Visit Shop</a></div>} />
+        <Route path="/" element={<div>Welcome to Ibaco Ice Cream Shop! <a href="#/shops/ibaco">Visit Shop</a></div>} />
       </Routes>
     </Router>
   )
