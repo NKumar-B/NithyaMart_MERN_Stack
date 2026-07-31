@@ -1,0 +1,6 @@
+[
+  { "id": 1, "name": "Ananya Rao", "rating": 5, "comment": "The chicken shawarma is unreal — always my go-to after a shopping haul at the mall!", "avatar": "🧕" },
+  { "id": 2, "name": "Rohit Verma", "rating": 5, "comment": "Paneer burger tastes better than most fast food chains. Quick pickup too, no waiting around.", "avatar": "🧑" },
+  { "id": 3, "name": "Sneha Kapoor", "rating": 4, "comment": "Loved the margherita pizza! Counter staff was super friendly and the order tracking is neat.", "avatar": "👩" },
+  { "id": 4, "name": "Vikram Singh", "rating": 5, "comment": "Chicken wings are perfectly spiced. This is now our family's regular food court stop.", "avatar": "👨" }
+]

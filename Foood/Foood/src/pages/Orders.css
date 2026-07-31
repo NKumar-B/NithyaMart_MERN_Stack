@@ -1,0 +1,23 @@
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.order-success-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.empty-state svg {
+  color: var(--color-secondary);
+  margin-bottom: 16px;
+}

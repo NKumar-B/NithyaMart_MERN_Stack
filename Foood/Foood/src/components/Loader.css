@@ -1,0 +1,29 @@
+.loader-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 20px;
+  color: var(--color-text-muted);
+}
+
+.loader-plate {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 5px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-right-color: var(--color-secondary);
+  animation: spin 0.9s linear infinite;
+  position: relative;
+}
+
+.loader-bite {
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

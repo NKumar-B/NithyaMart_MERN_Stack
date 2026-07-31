@@ -1,0 +1,13 @@
+import './Hero.css';
+
+export default function TrustBadge({ children }) {
+  return (
+    <span className="trust-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+      {children}
+    </span>
+  );
+}
+
