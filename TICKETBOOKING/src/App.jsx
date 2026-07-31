@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 // CSS inside same file
 const styles = `
+:root {
+  color-scheme: dark;
+}
+
 body {
   margin:0;
   font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
-  background:radial-gradient(circle at top,#1e3a8a,#030712 70%);
+  background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 45%,#020617 100%);
   color:#f8fafc;
 }
 
@@ -14,100 +18,216 @@ body {
 }
 
 .app-shell{
-  max-width:1300px;
+  max-width:1400px;
   margin:auto;
-  padding:32px 20px 60px;
+  padding:32px 20px 70px;
+}
+
+.top-nav{
+  position:sticky;
+  top:0;
+  z-index:900;
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  padding:12px 16px;
+  margin-bottom:24px;
+  background:rgba(2, 6, 23, 0.8);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:999px;
+}
+
+.nav-link{
+  text-decoration:none;
+  color:#f8fafc;
+  font-weight:700;
+  padding:8px 14px;
+  border-radius:999px;
+  transition:background .2s ease;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+}
+
+.nav-link:hover{
+  background:rgba(255,255,255,0.16);
 }
 
 .hero{
   text-align:center;
-  margin-bottom:32px;
+  margin-bottom:34px;
 }
 
 .hero h1{
   margin:0 0 10px;
   font-size:2.6rem;
+  letter-spacing:0.02em;
 }
 
 .hero p{
+  margin:0 auto;
+  max-width:700px;
   color:#dbeafe;
+  font-size:1rem;
 }
 
 .movie-list{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:24px;
 }
 
 .card{
-  background:white;
+  display:flex;
+  flex-direction:column;
+  background:rgba(255,255,255,0.96);
   color:#111827;
-  border-radius:20px;
+  border-radius:22px;
   overflow:hidden;
-  box-shadow:0 15px 30px rgba(0,0,0,.2);
-  transition:.3s;
+  box-shadow:0 20px 40px rgba(15,23,42,0.25);
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 
 .card:hover{
   transform:translateY(-6px);
+  box-shadow:0 24px 45px rgba(15,23,42,0.3);
 }
 
 .poster{
   width:100%;
   height:320px;
   object-fit:cover;
+  object-position:center;
 }
 
 .card-content{
-  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:16px 16px 20px;
+  flex:1;
+}
+
+.card-title{
+  margin:0;
+  font-size:1.05rem;
+  color:#111827;
+}
+
+.price-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  padding:7px 11px;
+  border-radius:999px;
+  background:#dbeafe;
+  color:#1d4ed8;
+  font-weight:700;
+  font-size:0.92rem;
 }
 
 button{
-  margin-top:10px;
-  width:100%;
-  padding:10px;
+  font:inherit;
   border:none;
-  border-radius:8px;
+  border-radius:10px;
   cursor:pointer;
-  background:#2563eb;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+
+button:hover{
+  transform:translateY(-1px);
+}
+
+.book-btn,
+.submit-btn{
+  width:100%;
+  padding:11px 14px;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
   color:white;
+  box-shadow:0 10px 20px rgba(37,99,235,0.2);
+}
+
+.close-btn{
+  background:#ef4444;
+  color:white;
+  padding:8px 10px;
+  float:right;
+}
+
+.secondary-btn{
+  padding:10px 12px;
+  background:#e5e7eb;
+  color:#111827;
 }
 
 .modal-backdrop{
   position:fixed;
   inset:0;
+  z-index:1000;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:rgba(0,0,0,.7);
+  padding:20px;
+  background:rgba(2,6,23,0.72);
 }
 
 .modal{
+  width:min(100%, 420px);
   background:white;
-  color:black;
-  width:350px;
-  padding:20px;
-  border-radius:15px;
+  color:#111827;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.25);
+}
+
+.modal h2{
+  margin:8px 0 16px;
+}
+
+.modal label{
+  display:block;
+  margin-top:10px;
+  font-weight:600;
 }
 
 .modal input,
 .modal select{
   width:100%;
-  margin:8px 0;
-  padding:10px;
-}
-
-.close-btn{
-  float:right;
-  background:red;
-}
-
-.submit-btn{
-  width:100%;
+  margin:8px 0 4px;
+  padding:10px 12px;
+  border:1px solid #d1d5db;
+  border-radius:10px;
 }
 
 .error{
-  color:red;
+  margin:10px 0 0;
+  color:#dc2626;
+  font-weight:600;
+}
+
+.success-banner{
+  margin:0 0 24px;
+  padding:12px 16px;
+  border-radius:12px;
+  background:rgba(22, 163, 74, 0.18);
+  color:#dcfce7;
+  border:1px solid rgba(74, 222, 128, 0.4);
+  font-weight:700;
+}
+
+.order-card{
+  background:rgba(255,255,255,0.96);
+  color:#111827;
+  padding:16px;
+  border-radius:16px;
+  margin-bottom:12px;
+  box-shadow:0 10px 24px rgba(2,6,23,0.12);
+}
+
+.order-card p{
+  margin:6px 0;
 }
 `;
 
@@ -428,81 +548,124 @@ export default function App() {
   const [showtime, setShowtime] = useState("10:00 AM");
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [currentView, setCurrentView] = useState("movies");
 
-  const handleBooking = () => {
-    if (ticketCount < 1) {
-      setError("Please select at least one ticket.");
-      return;
-    }
+  const openBookingModal = (movie) => {
+    setSelectedMovie(movie);
+    setTicketCount(1);
+    setShowtime("10:00 AM");
+    setError("");
+  };
 
-    setOrders([
-      ...orders,
-      {
-        movie: selectedMovie.name,
-        tickets: ticketCount,
-        showtime,
-        total: ticketCount * selectedMovie.price,
-      },
-    ]);
-
+  const closeBookingModal = () => {
     setSelectedMovie(null);
     setError("");
   };
 
+  const handleBooking = () => {
+    if (!selectedMovie) return;
+
+    const validTicketCount = Number(ticketCount);
+
+    if (!Number.isInteger(validTicketCount) || validTicketCount < 1) {
+      setError("Please select at least one ticket.");
+      return;
+    }
+
+    setOrders((prevOrders) => [
+      ...prevOrders,
+      {
+        movie: selectedMovie.name,
+        tickets: validTicketCount,
+        showtime,
+        total: validTicketCount * selectedMovie.price,
+      },
+    ]);
+
+    setSuccessMessage(`Booking confirmed for ${selectedMovie.name}!`);
+    setCurrentView("bookings");
+    closeBookingModal();
+  };
+
   return (
     <div className="app-shell">
-      <div className="hero">
-        <h1>🎬 Movie Ticket Booking</h1>
-        <p>Select your favorite movie and book your tickets.</p>
-      </div>
+      <nav className="top-nav">
+        <button type="button" className="nav-link" onClick={() => setCurrentView("movies")}>Movies</button>
+        <button type="button" className="nav-link" onClick={() => setCurrentView("bookings")}>My Bookings</button>
+      </nav>
 
-      <div className="movie-list">
-        {movies.map((movie) => (
-          <div className="card" key={movie.id}>
-            <img
-              src={movie.image}
-              alt={movie.name}
-              className="poster"
-            />
+      {currentView === "movies" ? (
+        <>
+          {successMessage && <div className="success-banner">{successMessage}</div>}
 
-            <div className="card-content">
-              <h2>{movie.name}</h2>
-              <p>${movie.price} per ticket</p>
-
-              <button onClick={() => setSelectedMovie(movie)}>
-                Book Now
-              </button>
-            </div>
+          <div className="hero">
+            <h1>🎬 Movie Ticket Booking</h1>
+            <p>Choose a movie, pick a show time, and confirm your booking in seconds.</p>
           </div>
-        ))}
-      </div>
+
+          <section id="movies">
+            <div className="movie-list">
+              {movies.map((movie) => (
+                <div className="card" key={movie.id}>
+                  <img src={movie.image} alt={movie.name} className="poster" />
+
+                  <div className="card-content">
+                    <h2 className="card-title">{movie.name}</h2>
+                    <span className="price-pill">${movie.price} / ticket</span>
+                    <button type="button" className="book-btn" onClick={() => openBookingModal(movie)}>
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </>
+      ) : (
+        <section id="bookings" style={{ marginTop: 20 }}>
+          <div className="hero">
+            <h1>🎟️ My Bookings</h1>
+            <p>Here are all the tickets you have booked.</p>
+          </div>
+
+          {orders.length === 0 ? (
+            <div className="order-card">No bookings yet. Pick a movie and confirm your ticket.</div>
+          ) : (
+            orders.map((order, index) => (
+              <div key={index} className="order-card">
+                <p><b>Movie:</b> {order.movie}</p>
+                <p><b>Tickets:</b> {order.tickets}</p>
+                <p><b>Show:</b> {order.showtime}</p>
+                <p><b>Total:</b> ${order.total}</p>
+              </div>
+            ))
+          )}
+        </section>
+      )}
 
       {selectedMovie && (
-        <div className="modal-backdrop">
-          <div className="modal">
-            <button
-              className="close-btn"
-              onClick={() => setSelectedMovie(null)}
-            >
+        <div className="modal-backdrop" onClick={closeBookingModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button type="button" className="close-btn" onClick={closeBookingModal}>
               ✖
             </button>
 
             <h2>{selectedMovie.name}</h2>
+            <p>Price: ${selectedMovie.price} per ticket</p>
 
-            <label>Tickets</label>
-
+            <label htmlFor="ticket-count">Tickets</label>
             <input
+              id="ticket-count"
               type="number"
               min="1"
               value={ticketCount}
-              onChange={(e) =>
-                setTicketCount(Number(e.target.value))
-              }
+              onChange={(e) => setTicketCount(e.target.value)}
             />
 
-            <label>Show Time</label>
-
+            <label htmlFor="showtime-select">Show Time</label>
             <select
+              id="showtime-select"
               value={showtime}
               onChange={(e) => setShowtime(e.target.value)}
             >
@@ -514,50 +677,13 @@ export default function App() {
 
             {error && <p className="error">{error}</p>}
 
-            <button
-              className="submit-btn"
-              onClick={handleBooking}
-            >
+            <button type="button" className="submit-btn" onClick={handleBooking}>
               Confirm Booking
             </button>
           </div>
         </div>
       )}
 
-      {orders.length > 0 && (
-        <div style={{ marginTop: 40 }}>
-          <h2>Bookings</h2>
-
-          {orders.map((order, index) => (
-            <div
-              key={index}
-              style={{
-                background: "white",
-                color: "black",
-                padding: 15,
-                borderRadius: 10,
-                marginBottom: 10,
-              }}
-            >
-              <p>
-                <b>Movie:</b> {order.movie}
-              </p>
-
-              <p>
-                <b>Tickets:</b> {order.tickets}
-              </p>
-
-              <p>
-                <b>Show:</b> {order.showtime}
-              </p>
-
-              <p>
-                <b>Total:</b> ${order.total}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

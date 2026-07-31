@@ -7,6 +7,6 @@ import TicketBooking from './TicketBooking.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
-    <TicketBooking />
+    {/* <TicketBooking /> */}
   </StrictMode>,
 )

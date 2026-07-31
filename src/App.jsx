@@ -213,7 +213,7 @@ function App() {
       <header className="navbar">
         <div className="nav-brand" onClick={unloadProject}>
           <span className="nav-logo">NITHYA MART</span>
-          <span className="nav-tag">WORKSPACE HUB</span>
+          <span className="nav-tag"> ONLINE SHOPPING APPLICATION</span>
         </div>
         
         <nav className="nav-links">
@@ -243,9 +243,9 @@ function App() {
           
           {/* Hero Section */}
           <div className="dashboard-header">
-            <h1 className="dashboard-title">Nithya Mart Consolidated Project Hub</h1>
+            <h1 className="dashboard-title">NITHYA MART Online Shopping Application</h1>
             <p className="dashboard-subtitle">
-              Welcome to the central MERN workspace. Select, launch, and run any project module created under Nithya Mart. Each app runs completely isolated inside sandboxed viewports.
+              Welcome to NITHYA MART which is a simple and user-friendly online shopping application developed to provide customers with a convenient shopping experience.
             </p>
           </div>
 
@@ -408,7 +408,7 @@ function App() {
                     <input 
                       type="text" 
                       className="contact-input" 
-                      placeholder="John Doe"
+                      placeholder="Badduluri Nithin Kumar"
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
                       required 
@@ -419,7 +419,7 @@ function App() {
                     <input 
                       type="email" 
                       className="contact-input" 
-                      placeholder="john@example.com"
+                      placeholder="nithinkumarbadduluri@gmail.com"
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
                       required 
