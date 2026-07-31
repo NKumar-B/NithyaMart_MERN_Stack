@@ -221,7 +221,7 @@ function App() {
             className={`nav-btn nav-dashboard-btn ${activeProject === null ? 'active' : ''}`}
             onClick={unloadProject}
           >
-            📊 Dashboard
+            Dashboard
           </button>
           
           {projects.map((proj) => (
@@ -230,7 +230,7 @@ function App() {
               className={`nav-btn ${activeProject?.id === proj.id ? 'active' : ''}`}
               onClick={() => loadProject(proj)}
             >
-              {proj.icon} {proj.name.split(' ')[0]}
+              {proj.name.split(' ')[0]}
             </button>
           ))}
         </nav>
