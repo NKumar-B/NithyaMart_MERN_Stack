@@ -93,10 +93,79 @@ const projects = [
   }
 ];
 
+const carouselSlides = [
+  {
+    id: 'bag',
+    title: 'Luxury Bags Collection',
+    subtitle: 'Explore our curated catalog of designer handbags, office bags, and travel accessories.',
+    image: '/BAG/src/assets/categories/luxury-handbags.jpg',
+    btnText: 'Shop Handbags 👜'
+  },
+  {
+    id: 'chocolates',
+    title: 'Exquisite Chocolate Boutique',
+    subtitle: 'Taste imported truffles, custom confection boxes, and premium cocoa collections.',
+    image: '/CHOCOLATES/src/assets/hero.png',
+    btnText: 'Browse Sweets 🍫'
+  },
+  {
+    id: 'food',
+    title: 'BiteCourt Food Ordering',
+    subtitle: 'Satisfy your cravings with fast food favorites, custom platters, and quick checkout.',
+    image: '/Foood/Foood/src/assets/french-fries.jpeg',
+    btnText: 'Order Now 🍔'
+  }
+];
+
 function App() {
   const [activeProject, setActiveProject] = useState(null);
   const [iframeLoading, setIframeLoading] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [contactName, setContactName] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactMessage, setContactMessage] = useState('');
+  const [contactSuccess, setContactSuccess] = useState(false);
+  
   const cardRefs = useRef({});
+  const slideInterval = useRef(null);
+
+  // Auto transition carousel slides
+  useEffect(() => {
+    if (activeProject === null) {
+      startSlideShow();
+    } else {
+      stopSlideShow();
+    }
+    return () => stopSlideShow();
+  }, [activeProject]);
+
+  const startSlideShow = () => {
+    stopSlideShow();
+    slideInterval.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+    }, 4500);
+  };
+
+  const stopSlideShow = () => {
+    if (slideInterval.current) {
+      clearInterval(slideInterval.current);
+    }
+  };
+
+  const selectSlide = (index) => {
+    setCurrentSlide(index);
+    startSlideShow(); // reset timer
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+    startSlideShow();
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length);
+    startSlideShow();
+  };
 
   // 3D card tilt effect on mouse hover
   const handleMouseMove = (e, id) => {
@@ -112,15 +181,30 @@ function App() {
   const loadProject = (project) => {
     setIframeLoading(true);
     setActiveProject(project);
+    stopSlideShow();
   };
 
   const unloadProject = () => {
     setActiveProject(null);
     setIframeLoading(false);
+    setCurrentSlide(0);
   };
 
   const handleIframeLoad = () => {
     setIframeLoading(false);
+  };
+
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
+    if (!contactName || !contactEmail || !contactMessage) return;
+    // Mock submit trigger
+    setContactSuccess(true);
+    setTimeout(() => {
+      setContactName('');
+      setContactEmail('');
+      setContactMessage('');
+      setContactSuccess(false);
+    }, 3000);
   };
 
   return (
@@ -128,7 +212,7 @@ function App() {
       {/* Persistent Global Header */}
       <header className="navbar">
         <div className="nav-brand" onClick={unloadProject}>
-          <span className="nav-logo">TEAM 4</span>
+          <span className="nav-logo">NITHYA MART</span>
           <span className="nav-tag">WORKSPACE HUB</span>
         </div>
         
@@ -156,13 +240,65 @@ function App() {
       {activeProject === null ? (
         // Project Hub Dashboard
         <main className="dashboard">
+          
+          {/* Hero Section */}
           <div className="dashboard-header">
-            <h1 className="dashboard-title">Team 4 Consolidated Project Hub</h1>
+            <h1 className="dashboard-title">Nithya Mart Consolidated Project Hub</h1>
             <p className="dashboard-subtitle">
-              Welcome to the centralized workspace index. Browse and run any project module created by MERN Stack Team 4. All modules run isolated in a secure iframe sandbox to avoid stylesheet or dependency conflicts.
+              Welcome to the central MERN workspace. Select, launch, and run any project module created under Nithya Mart. Each app runs completely isolated inside sandboxed viewports.
             </p>
           </div>
 
+          {/* Carousel Section */}
+          <section className="carousel-container">
+            {carouselSlides.map((slide, index) => (
+              <div 
+                key={slide.id}
+                className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
+              >
+                <img 
+                  src={slide.image} 
+                  alt={slide.title} 
+                  className="carousel-image-bg" 
+                />
+                <div className="carousel-overlay"></div>
+                <div className="carousel-content">
+                  <span className="carousel-tag">Featured Module</span>
+                  <h2 className="carousel-title">{slide.title}</h2>
+                  <p className="carousel-subtitle">{slide.subtitle}</p>
+                  <button 
+                    className="carousel-btn"
+                    onClick={() => loadProject(projects.find(p => p.id === slide.id))}
+                  >
+                    {slide.btnText}
+                  </button>
+                </div>
+              </div>
+            ))}
+            
+            {/* Carousel Navigation Arrows */}
+            <button className="carousel-arrow prev" onClick={handlePrevSlide}>‹</button>
+            <button className="carousel-arrow next" onClick={handleNextSlide}>›</button>
+
+            {/* Carousel Dot Selectors */}
+            <div className="carousel-dots">
+              {carouselSlides.map((_, index) => (
+                <span
+                  key={index}
+                  className={`carousel-dot ${index === currentSlide ? 'active' : ''}`}
+                  onClick={() => selectSlide(index)}
+                />
+              ))}
+            </div>
+          </section>
+
+          {/* Projects Deck Header */}
+          <div className="section-divider">
+            <h2 className="section-title">Explore Applications</h2>
+            <div className="section-line"></div>
+          </div>
+
+          {/* Project Grid */}
           <div className="card-grid">
             {projects.map((proj) => (
               <div
@@ -191,6 +327,89 @@ function App() {
               </div>
             ))}
           </div>
+
+          {/* Contact Section */}
+          <section className="contact-section">
+            <div className="section-divider">
+              <h2 className="section-title">Get in Touch</h2>
+              <div className="section-line"></div>
+            </div>
+            
+            <div className="contact-card">
+              <h3 className="contact-card-title">Send a Message</h3>
+              <p className="contact-card-subtitle">Have questions or feedback about Nithya Mart? Drop us a message below.</p>
+              
+              <form className="contact-form" onSubmit={handleContactSubmit}>
+                <div className="contact-form-row">
+                  <div className="contact-form-group">
+                    <label className="contact-label">Your Name</label>
+                    <input 
+                      type="text" 
+                      className="contact-input" 
+                      placeholder="John Doe"
+                      value={contactName}
+                      onChange={(e) => setContactName(e.target.value)}
+                      required 
+                    />
+                  </div>
+                  <div className="contact-form-group">
+                    <label className="contact-label">Email Address</label>
+                    <input 
+                      type="email" 
+                      className="contact-input" 
+                      placeholder="john@example.com"
+                      value={contactEmail}
+                      onChange={(e) => setContactEmail(e.target.value)}
+                      required 
+                    />
+                  </div>
+                </div>
+                
+                <div className="contact-form-group">
+                  <label className="contact-label">Message</label>
+                  <textarea 
+                    className="contact-textarea" 
+                    rows="4" 
+                    placeholder="Type your message here..."
+                    value={contactMessage}
+                    onChange={(e) => setContactMessage(e.target.value)}
+                    required
+                  ></textarea>
+                </div>
+                
+                <button type="submit" className="contact-submit-btn">
+                  {contactSuccess ? '✓ Message Sent!' : 'Send Message ✉'}
+                </button>
+              </form>
+            </div>
+          </section>
+
+          {/* Footer Section */}
+          <footer className="footer">
+            <div className="footer-brand">
+              <span className="nav-logo">NITHYA MART</span>
+              <span className="footer-divider">|</span>
+              <span className="footer-motto">Centralized Hub</span>
+            </div>
+            
+            <div className="footer-links">
+              {projects.map((proj) => (
+                <span 
+                  key={proj.id} 
+                  className="footer-link"
+                  onClick={() => loadProject(proj)}
+                >
+                  {proj.name}
+                </span>
+              ))}
+            </div>
+            
+            <div className="footer-line-horizontal"></div>
+            
+            <p className="footer-copyright">
+              © 2026 Nithya Mart Workspace. All project histories preserved. All rights reserved.
+            </p>
+          </footer>
         </main>
       ) : (
         // Iframe Viewport
