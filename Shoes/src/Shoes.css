@@ -1,0 +1,378 @@
+ /* Main Page */
+
+.shoes-page {
+    min-height: 100vh;
+    background: #f5f5f5;
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* Hero Section */
+
+.hero {
+    background: linear-gradient(135deg,#111,#333);
+    color:white;
+    text-align:center;
+    padding:60px 20px;
+}
+
+
+.hero h1 {
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+
+.hero p {
+    font-size:18px;
+    margin-bottom:30px;
+}
+
+
+.hero input {
+
+    width:50%;
+    padding:15px;
+    border-radius:30px;
+    border:none;
+    outline:none;
+    font-size:16px;
+
+}
+
+
+
+/* Category Buttons */
+
+.categories {
+
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    padding:30px;
+
+}
+
+
+.categories button {
+
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    font-weight:600;
+    transition:0.3s;
+
+}
+
+
+.categories button:hover {
+
+    transform:translateY(-3px);
+    background:#111;
+    color:white;
+
+}
+
+
+
+.categories .active {
+
+    background:#ff5722;
+    color:white;
+
+}
+
+
+
+/* Shoes Grid */
+
+
+.shoe-grid {
+
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+    gap:30px;
+    padding:40px;
+
+}
+
+
+
+/* Shoe Card */
+
+
+.shoe-card {
+
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    padding-bottom:20px;
+    text-align:center;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.12);
+
+    transition:0.4s;
+
+}
+
+
+
+.shoe-card:hover {
+
+    transform:translateY(-10px);
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,0.25);
+
+}
+
+
+
+.shoe-card img {
+
+    width:100%;
+    height:230px;
+    object-fit:cover;
+
+}
+
+
+
+.shoe-card h3 {
+
+    font-size:22px;
+    margin:15px 0 5px;
+
+}
+
+
+
+.shoe-card p {
+
+    margin:8px;
+    color:#555;
+
+}
+
+
+
+.shoe-card span {
+
+    display:inline-block;
+
+    background:#eee;
+
+    padding:6px 15px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+}
+
+
+
+.shoe-card h4 {
+
+    color:#e53935;
+
+    font-size:22px;
+
+    margin:15px;
+
+}
+
+
+
+/* View Details Button */
+
+
+.shoe-card button {
+
+    background:#111;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 30px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:0.3s;
+
+}
+
+
+
+.shoe-card button:hover {
+
+    background:#ff5722;
+
+    transform:scale(1.05);
+
+}
+
+
+
+/* Virat Kohli Shoes Highlight */
+
+
+.shoe-card:nth-child(20),
+.shoe-card:nth-child(21),
+.shoe-card:nth-child(22){
+
+    border:3px solid #ff9800;
+
+}
+
+
+
+.shoe-card:nth-child(20)::before {
+
+    content:"🔥 VIRAT KOHLI COLLECTION";
+
+    display:block;
+
+    background:#ff9800;
+
+    color:white;
+
+    padding:8px;
+
+    font-weight:bold;
+
+}
+
+
+
+/* Footer */
+
+
+.footer {
+
+    background:#111;
+
+    color:white;
+
+    padding:40px 20px;
+
+    text-align:center;
+
+    margin-top:50px;
+
+}
+
+
+
+.footer h2 {
+
+    font-size:28px;
+
+}
+
+
+
+.footer p {
+
+    color:#ccc;
+
+}
+
+
+
+.footer-links {
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    flex-wrap:wrap;
+
+    margin:20px;
+
+}
+
+
+
+.footer-links a {
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:0.3s;
+
+}
+
+
+
+.footer-links a:hover {
+
+    color:#ff5722;
+
+}
+
+
+
+.footer-bottom {
+
+    border-top:1px solid #444;
+
+    padding-top:20px;
+
+    margin-top:20px;
+
+}
+
+
+
+/* Responsive Design */
+
+
+@media(max-width:768px){
+
+
+.hero h1 {
+
+    font-size:30px;
+
+}
+
+
+.hero input {
+
+    width:90%;
+
+}
+
+
+.shoe-grid {
+
+    padding:20px;
+
+}
+
+
+
+.categories {
+
+    padding:20px;
+
+}
+
+
+}
