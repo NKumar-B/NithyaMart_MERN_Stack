@@ -1,10 +1,22 @@
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import ProductSection from "./components/ProductSection";
 import Footer from "./components/Footer";
 import "./App.css";
 
+function resolveImagePath(path) {
+  if (!path) return "";
+  if (window.location.pathname.includes("/FRAGRANCE/")) {
+    return `/FRAGRANCE/public${path}`;
+  }
+  return path;
+}
+
 function App() {
+  const [cart, setCart] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   const perfumes = [
     {
       name: "Coco Mademoiselle",
@@ -167,9 +179,42 @@ function App() {
     }
   ];
 
+  const addToCart = (product) => {
+    setCart((prev) => {
+      const exists = prev.find((item) => item.name === product.name);
+      if (exists) {
+        return prev.map((item) =>
+          item.name === product.name
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prev, { ...product, quantity: 1 }];
+    });
+  };
+
+  const removeFromCart = (name) => {
+    setCart((prev) => prev.filter((item) => item.name !== name));
+  };
+
+  const calculateTotal = (cartItems) => {
+    return cartItems.reduce((acc, item) => {
+      const numericPrice = parseInt(item.price.replace(/[^\d]/g, ""), 10);
+      return acc + numericPrice * item.quantity;
+    }, 0);
+  };
+
+  const handleCheckout = () => {
+    alert("Thank you for shopping at Fragrance Hub! Your checkout is successful. 🎉");
+    setCart([]);
+    setIsCartOpen(false);
+  };
+
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <>
-      <Navbar />
+      <Navbar cartCount={totalItems} onCartClick={() => setIsCartOpen(true)} />
 
       <Hero />
 
@@ -177,37 +222,87 @@ function App() {
         id="perfumes"
         title="🌹 Luxury Perfumes"
         products={perfumes}
+        onAddToCart={addToCart}
       />
 
       <ProductSection
         id="room"
         title="🏠 Room Sprays"
         products={roomSprays}
+        onAddToCart={addToCart}
       />
 
       <ProductSection
         id="pooja"
         title="🪔 Pooja Fragrances"
         products={pooja}
+        onAddToCart={addToCart}
       />
 
       <ProductSection
         id="bathroom"
         title="🚿 Bathroom Fresheners"
         products={bathroom}
+        onAddToCart={addToCart}
       />
 
       <ProductSection
         id="candles"
         title="🕯️ Scented Candles"
         products={candles}
+        onAddToCart={addToCart}
       />
 
       <ProductSection
         id="oils"
         title="🌿 Essential Oils"
         products={oils}
+        onAddToCart={addToCart}
       />
+
+      {isCartOpen && (
+        <div className="cart-overlay" onClick={() => setIsCartOpen(false)}>
+          <div className="cart-sidebar" onClick={(e) => e.stopPropagation()}>
+            <div className="cart-sidebar-header">
+              <h2>Your Cart 🛒</h2>
+              <button className="close-cart-btn" onClick={() => setIsCartOpen(false)}>✕</button>
+            </div>
+
+            {cart.length === 0 ? (
+              <div className="empty-cart-view">
+                <p>Your cart is empty.</p>
+                <span className="empty-cart-icon">🌸</span>
+              </div>
+            ) : (
+              <>
+                <div className="cart-items-list">
+                  {cart.map((item) => (
+                    <div key={item.name} className="cart-item-row">
+                      <img src={resolveImagePath(item.image)} alt={item.name} className="cart-item-img" />
+                      <div className="cart-item-details">
+                        <h4>{item.name}</h4>
+                        <p>{item.price} x {item.quantity}</p>
+                      </div>
+                      <button className="cart-item-remove-btn" onClick={() => removeFromCart(item.name)}>
+                        🗑️
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="cart-sidebar-footer">
+                  <div className="cart-total-row">
+                    <span>Total:</span>
+                    <span>₹{calculateTotal(cart).toLocaleString()}</span>
+                  </div>
+                  <button className="checkout-btn" onClick={handleCheckout}>
+                    Checkout Now 💳
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
       <Footer />
     </>

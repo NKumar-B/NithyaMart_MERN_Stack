@@ -1,4 +1,4 @@
-function Navbar() {
+function Navbar({ cartCount, onCartClick }) {
   return (
     <header>
       <h1>✨ Fragrance Hub</h1>
@@ -10,6 +10,9 @@ function Navbar() {
         <a href="#bathroom">Bathroom</a>
         <a href="#candles">Candles</a>
         <a href="#oils">Essential Oils</a>
+        <button className="cart-toggle-btn" onClick={onCartClick}>
+          🛒 Cart {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+        </button>
       </nav>
     </header>
   );
