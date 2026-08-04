@@ -1,7 +1,15 @@
+function resolveImagePath(path) {
+  if (!path) return "";
+  if (window.location.pathname.includes("/FRAGRANCE/")) {
+    return `/FRAGRANCE/public${path}`;
+  }
+  return path;
+}
+
 function ProductCard({ product }) {
   return (
     <div className="card">
-      <img src={product.image} alt={product.name} />
+      <img src={resolveImagePath(product.image)} alt={product.name} />
 
       <h3>{product.name}</h3>
 
