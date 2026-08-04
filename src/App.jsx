@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const projects = [
   {
@@ -126,8 +127,41 @@ function App() {
   const [contactMessage, setContactMessage] = useState('');
   const [contactSuccess, setContactSuccess] = useState(false);
   
+  // Theme state: default to localStorage or preferences
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode');
+    if (saved !== null) {
+      return saved === 'true';
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
   const cardRefs = useRef({});
   const slideInterval = useRef(null);
+
+  // Sync theme with DOM root class
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+    }
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
+
+  // Global mouse spotlight position tracking (updating DOM properties directly for 60 FPS performance)
+  useEffect(() => {
+    const handleGlobalMouseMove = (e) => {
+      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    };
+    window.addEventListener('mousemove', handleGlobalMouseMove);
+    return () => window.removeEventListener('mousemove', handleGlobalMouseMove);
+  }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
 
   // Auto transition carousel slides
   useEffect(() => {
@@ -209,32 +243,55 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* Ambient background glow blobs */}
+      <div className="bg-glow-blobs">
+        <div className="bg-glow-blob blob-primary" />
+        <div className="bg-glow-blob blob-accent1" />
+        <div className="bg-glow-blob blob-accent2" />
+      </div>
+
       {/* Persistent Global Header */}
-      <header className="navbar">
+      <motion.header 
+        className="navbar"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
         <div className="nav-brand" onClick={unloadProject}>
           <span className="nav-logo">NITHYA MART</span>
           <span className="nav-tag"> ONLINE SHOPPING APPLICATION</span>
         </div>
         
-        <nav className="nav-links">
-          <button 
-            className={`nav-btn nav-dashboard-btn ${activeProject === null ? 'active' : ''}`}
-            onClick={unloadProject}
-          >
-            Dashboard
-          </button>
-          
-          {projects.map((proj) => (
-            <button
-              key={proj.id}
-              className={`nav-btn ${activeProject?.id === proj.id ? 'active' : ''}`}
-              onClick={() => loadProject(proj)}
+        <div className="nav-actions">
+          <nav className="nav-links">
+            <button 
+              className={`nav-btn nav-dashboard-btn ${activeProject === null ? 'active' : ''}`}
+              onClick={unloadProject}
             >
-              {proj.name.split(' ')[0]}
+              Dashboard
             </button>
-          ))}
-        </nav>
-      </header>
+            
+            {projects.map((proj) => (
+              <button
+                key={proj.id}
+                className={`nav-btn ${activeProject?.id === proj.id ? 'active' : ''}`}
+                onClick={() => loadProject(proj)}
+              >
+                {proj.name.split(' ')[0]}
+              </button>
+            ))}
+          </nav>
+
+          <button 
+            className="theme-toggle-btn" 
+            onClick={toggleDarkMode} 
+            aria-label="Toggle dark mode"
+            title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {darkMode ? '☀️' : '🌙'}
+          </button>
+        </div>
+      </motion.header>
 
       {/* Main Workspace Frame */}
       {activeProject === null ? (
@@ -242,29 +299,24 @@ function App() {
         <main className="dashboard">
           
           {/* Hero Section */}
-          <div className="dashboard-header">
+          <motion.div 
+            className="dashboard-header"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <h1 className="dashboard-title">NITHYA MART Online Shopping Application</h1>
             <p className="dashboard-subtitle">
               Welcome to NITHYA MART which is a simple and user-friendly online shopping application developed to provide customers with a convenient shopping experience.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Carousel Section (Inline styled layout to guarantee height & display visibility) */}
-          <section 
+          {/* Carousel Section */}
+          <motion.section 
             className="carousel-container"
-            style={{ 
-              position: 'relative', 
-              width: '100%', 
-              maxWidth: '1200px', 
-              height: '380px', 
-              borderRadius: '24px', 
-              border: '1px solid rgba(255, 255, 255, 0.06)', 
-              overflow: 'hidden', 
-              marginBottom: '3.5rem', 
-              background: '#0d0d15', 
-              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.4)',
-              display: 'block'
-            }}
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
             {carouselSlides.map((slide, index) => {
               const isActive = index === currentSlide;
@@ -272,68 +324,35 @@ function App() {
                 <div 
                   key={slide.id}
                   className={`carousel-slide ${isActive ? 'active' : ''}`}
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    opacity: isActive ? 1 : 0,
-                    zIndex: isActive ? 2 : 1,
-                    transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                    display: 'flex',
-                    alignItems: 'flex-end'
-                  }}
                 >
                   <img 
                     src={slide.image} 
                     alt={slide.title} 
                     className="carousel-image-bg" 
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      filter: 'brightness(0.35) contrast(1.05)'
-                    }}
                   />
-                  <div 
-                    className="carousel-overlay"
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(to top, rgba(13, 14, 21, 0.95) 15%, rgba(13, 14, 21, 0.2) 100%)',
-                      zIndex: 2
-                    }}
-                  ></div>
-                  <div 
-                    className="carousel-content"
-                    style={{
-                      position: 'relative',
-                      zIndex: 3,
-                      padding: '3rem 4rem',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'flex-start',
-                      gap: '0.5rem',
-                      width: '100%'
-                    }}
-                  >
-                    <span className="carousel-tag">Featured Module</span>
-                    <h2 className="carousel-title">{slide.title}</h2>
-                    <p className="carousel-subtitle">{slide.subtitle}</p>
-                    <button 
-                      className="carousel-btn"
-                      onClick={() => loadProject(projects.find(p => p.id === slide.id))}
-                    >
-                      {slide.btnText}
-                    </button>
-                  </div>
+                  <div className="carousel-overlay"></div>
+                  
+                  <AnimatePresence mode="wait">
+                    {isActive && (
+                      <motion.div 
+                        className="carousel-content"
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 30 }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
+                      >
+                        <span className="carousel-tag">Featured Module</span>
+                        <h2 className="carousel-title">{slide.title}</h2>
+                        <p className="carousel-subtitle">{slide.subtitle}</p>
+                        <button 
+                          className="carousel-btn"
+                          onClick={() => loadProject(projects.find(p => p.id === slide.id))}
+                        >
+                          {slide.btnText}
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}
@@ -352,7 +371,77 @@ function App() {
                 />
               ))}
             </div>
-          </section>
+          </motion.section>
+
+          {/* Orbital Universe Navigation Map */}
+          <motion.div 
+            className="space-universe-container"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="universe-bg-overlay"></div>
+            <div className="universe-title-card">
+              <h3 className="universe-main-title">Interactive Module Orbit</h3>
+              <p className="universe-subtitle">Hover over an orbiting module planet to pause and explore, then click to launch the application instantly.</p>
+            </div>
+            
+            <div className="universe-orbits">
+              <div className="universe-core">
+                <div className="core-glow"></div>
+                <div className="core-content">
+                  <span className="core-logo">NM</span>
+                  <span className="core-text">Hub Core</span>
+                </div>
+              </div>
+              
+              <div className="orbit-track orbit-track-1"></div>
+              <div className="orbit-track orbit-track-2"></div>
+              <div className="orbit-track orbit-track-3"></div>
+              
+              {/* Orbiting Planets */}
+              <div 
+                className="universe-planet planet-bag" 
+                onClick={() => loadProject(projects.find(p => p.id === 'bag'))}
+              >
+                <span className="planet-icon">👜</span>
+                <span className="planet-tooltip">BAG Shop</span>
+              </div>
+              
+              <div 
+                className="universe-planet planet-book" 
+                onClick={() => loadProject(projects.find(p => p.id === 'book'))}
+              >
+                <span className="planet-icon">📚</span>
+                <span className="planet-tooltip">BOOK Store</span>
+              </div>
+              
+              <div 
+                className="universe-planet planet-chocolate" 
+                onClick={() => loadProject(projects.find(p => p.id === 'chocolates'))}
+              >
+                <span className="planet-icon">🍫</span>
+                <span className="planet-tooltip">CHOCOLATES Shop</span>
+              </div>
+              
+              <div 
+                className="universe-planet planet-food" 
+                onClick={() => loadProject(projects.find(p => p.id === 'food'))}
+              >
+                <span className="planet-icon">🍔</span>
+                <span className="planet-tooltip">BiteCourt FOOD</span>
+              </div>
+              
+              <div 
+                className="universe-planet planet-sports" 
+                onClick={() => loadProject(projects.find(p => p.id === 'sports'))}
+              >
+                <span className="planet-icon">⚽</span>
+                <span className="planet-tooltip">SPORTS Goods</span>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Projects Deck Header */}
           <div className="section-divider">
@@ -361,20 +450,43 @@ function App() {
           </div>
 
           {/* Project Grid */}
-          <div className="card-grid">
+          <motion.div 
+            className="card-grid"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.08,
+                  delayChildren: 0.3
+                }
+              }
+            }}
+          >
             {projects.map((proj) => (
-              <div
+              <motion.div
                 key={proj.id}
                 ref={(el) => (cardRefs.current[proj.id] = el)}
                 className={`project-card ${proj.theme}`}
                 onMouseMove={(e) => handleMouseMove(e, proj.id)}
                 onClick={() => loadProject(proj)}
+                variants={{
+                  hidden: { opacity: 0, y: 25 },
+                  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 15 } }
+                }}
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3 }}
               >
                 <div className="card-header">
                   <div className="card-icon-container">
                     {proj.icon}
                   </div>
-                  <span className="card-tag">{proj.category}</span>
+                  <div className="card-tag-wrapper">
+                    <span className="card-tag-dot"></span>
+                    <span className="card-tag">{proj.category}</span>
+                  </div>
                 </div>
                 
                 <div className="card-body">
@@ -386,12 +498,18 @@ function App() {
                   <span>Launch Application</span>
                   <span>→</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Contact Section */}
-          <section className="contact-section">
+          <motion.section 
+            className="contact-section"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="section-divider">
               <h2 className="section-title">Get in Touch</h2>
               <div className="section-line"></div>
@@ -439,15 +557,26 @@ function App() {
                   ></textarea>
                 </div>
                 
-                <button type="submit" className="contact-submit-btn">
+                <motion.button 
+                  type="submit" 
+                  className="contact-submit-btn"
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                >
                   {contactSuccess ? '✓ Message Sent!' : 'Send Message ✉'}
-                </button>
+                </motion.button>
               </form>
             </div>
-          </section>
+          </motion.section>
 
           {/* Footer Section */}
-          <footer className="footer">
+          <motion.footer 
+            className="footer"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <div className="footer-brand">
               <span className="nav-logo">NITHYA MART</span>
               <span className="footer-divider">|</span>
@@ -471,8 +600,8 @@ function App() {
             <p className="footer-copyright">
               © 2026 Nithya Mart Workspace. All project histories preserved. All rights reserved.
             </p>
-          </footer>
-        </main>
+          </motion.footer>
+          </main>
       ) : (
         // Iframe Viewport
         <div className="viewport-container">
