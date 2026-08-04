@@ -137,10 +137,14 @@ function Home() {
               subtitle="Our Story"
               title="About LuxeBags"
             />
-            <p>
-              LuxeBags brings premium craftsmanship and elegant designs
-              together for style, comfort, and durability.
-            </p>
+            <div className="about-content-wrapper">
+              <p>
+                LuxeBags was established with a singular vision: to create timeless companions for life's daily journeys. We blend heritage craftsmanship with modern functionality, sourcing the finest full-grain Italian leathers, luxury hardware, and sustainable fabrics.
+              </p>
+              <p style={{ marginTop: '1.2rem' }}>
+                Every stitch is placed with precision by master artisans who have spent decades perfecting their craft. From hand-burnished edges to reinforced structural seams, our dedication to quality, durability, and ethical sourcing ensures your bag stays pristine for years to come.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -150,10 +154,18 @@ function Home() {
               subtitle="Get in Touch"
               title="Contact Us"
             />
-            <p>
-              Reach us at support@luxebags.com or call +1 (555) 123-4567 for
-              questions and custom orders.
-            </p>
+            <div className="contact-info-grid" style={{ marginTop: '1.8rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', textAlign: 'left' }}>
+              <div>
+                <p>
+                  Have questions about our current collection, custom orders, or shipping timelines? Our customer concierge desk is available 24/7 to provide assistance.
+                </p>
+              </div>
+              <div style={{ background: 'rgba(0,0,0,0.02)', padding: '1.5rem', borderRadius: '1rem', border: '1px solid rgba(0,0,0,0.05)' }}>
+                <p style={{ margin: '0 0 0.8rem 0' }}><strong>📧 Concierge Email:</strong> support@luxebags.com</p>
+                <p style={{ margin: '0 0 0.8rem 0' }}><strong>📞 Customer Service:</strong> +1 (555) 123-4567</p>
+                <p style={{ margin: '0' }}><strong>🏢 Corporate Suite:</strong> 725 Fifth Avenue, Manhattan, NY</p>
+              </div>
+            </div>
           </div>
         </section>
 
