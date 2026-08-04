@@ -1,122 +1,217 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import ProductSection from "./components/ProductSection";
+import Footer from "./components/Footer";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const perfumes = [
+    {
+      name: "Coco Mademoiselle",
+      brand: "Brand: Chanel",
+      price: "₹16,500",
+      image: "/images/channel.avif"
+    },
+    {
+      name: "Sauvage",
+      brand: "Brand: Dior",
+      price: "₹12,900",
+      image: "/images/savuge.jpg"
+    },
+    {
+      name: "Bloom",
+      brand: "Brand: Gucci",
+      price: "₹11,800",
+      image: "/images/gucci.jpg"
+    },
+    {
+      name: "Eros",
+      brand: "Brand: Versace",
+      price: "₹9,800",
+      image: "/images/eros.jpg"
+    }
+  ];
+
+  const roomSprays = [
+    {
+      name: "Lavender Spray",
+      brand: "Air Wick",
+      price: "₹299",
+      image: "/images/lavenderfrag.jpg"
+    },
+    {
+      name: "Cool Surf Blue",
+      brand: "Godrej aer",
+      price: "₹249",
+      image: "/images/airfreshner.jpg"
+    },
+    {
+      name: "Rose Bloom",
+      brand: "Ambi Pur",
+      price: "₹349",
+      image: "/images/roomspray1.jpg"
+    },
+    {
+      name: "Linen Sky",
+      brand: "Febreze",
+      price: "₹39",
+      image: "/images/homefrag.jpg"
+    }
+  ];
+
+  const pooja = [
+    {
+      name: "Sandal Agarbatti",
+      brand: "Cycle Pure",
+      price: "₹90",
+      image: "/images/agarbatti.jpg"
+    },
+    {
+      name: "Divine Incense",
+      brand: "Mangaldeep",
+      price: "₹120",
+      image: "/images/incence.jpg"
+    },
+    {
+      name: "Dhoop Sticks",
+      brand: "Cycle Pure",
+      price: "₹140",
+      image: "/images/dhoop.jpg"
+    },
+    {
+      name: "Incense Cones",
+      brand: "Phool",
+      price: "₹250",
+      image: "/images/cones.jpg"
+    }
+  ];
+
+  const bathroom = [
+    {
+      name: "Bathroom Block",
+      brand: "Odonil",
+      price: "₹75",
+      image: "/images/bath.jpg"
+    },
+    {
+      name: "Automatic Freshener",
+      brand: "Air Wick",
+      price: "₹499",
+      image: "/images/auto.jpg"
+    },
+    {
+      name: "Bathroom Spray",
+      brand: "Godrej aer",
+      price: "₹149",
+      image: "/images/bathspary.avif"
+    },
+    {
+      name: "Hygienic Fresh",
+      brand: "Harpic",
+      price: "₹199",
+      image: "/images/bathcleaner.jpg"
+    }
+  ];
+
+  const candles = [
+    {
+      name: "Vanilla Candle",
+      brand: "Yankee Candle",
+      price: "₹1800",
+      image: "/images/vennila.jpg"
+    },
+    {
+      name: "Mahogany",
+      brand: "Bath & Body Works",
+      price: "₹2200",
+      image: "/images/magohny.avif"
+    },
+    {
+      name: "Lavender Candle",
+      brand: "Miniso",
+      price: "₹399",
+      image: "/images/lavendercandle.jpg"
+    },
+    {
+      name: "Jasmine Candle",
+      brand: "IKEA",
+      price: "₹399",
+      image: "/images/jasmine.jpg"
+    }
+  ];
+
+  const oils = [
+    {
+      name: "Lavender Oil",
+      brand: "Soulflower",
+      price: "₹499",
+      image: "/images/lavoil.jpg"
+    },
+    {
+      name: "Tea Tree Oil",
+      brand: "Organic Harvest",
+      price: "₹599",
+      image: "/images/teaoil.jpg"
+    },
+    {
+      name: "Reed Diffuser",
+      brand: "Home Fragrance",
+      price: "₹799",
+      image: "/images/reedoil.jpg"
+    },
+    {
+      name: "Aroma Diffuser",
+      brand: "Generic",
+      price: "₹1499",
+      image: "/images/aroma.jpg"
+    }
+  ];
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <Navbar />
 
-      <div className="ticks"></div>
+      <Hero />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <ProductSection
+        id="perfumes"
+        title="🌹 Luxury Perfumes"
+        products={perfumes}
+      />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      <ProductSection
+        id="room"
+        title="🏠 Room Sprays"
+        products={roomSprays}
+      />
+
+      <ProductSection
+        id="pooja"
+        title="🪔 Pooja Fragrances"
+        products={pooja}
+      />
+
+      <ProductSection
+        id="bathroom"
+        title="🚿 Bathroom Fresheners"
+        products={bathroom}
+      />
+
+      <ProductSection
+        id="candles"
+        title="🕯️ Scented Candles"
+        products={candles}
+      />
+
+      <ProductSection
+        id="oils"
+        title="🌿 Essential Oils"
+        products={oils}
+      />
+
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
