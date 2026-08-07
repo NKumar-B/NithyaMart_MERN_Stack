@@ -224,7 +224,7 @@ function App() {
       </div>
 
       {/* Full-Width Header Navbar */}
-      <motion.header 
+      {/* <motion.header 
         className="navbar-header"
         initial={{ opacity: 0, y: -25 }}
         animate={{ opacity: 1, y: 0 }}
@@ -266,7 +266,53 @@ function App() {
             {darkMode ? '☀️' : '🌙'}
           </button>
         </div>
-      </motion.header>
+      // </motion.header> */}
+
+      {activeProject === null && (
+  <motion.header
+    className="navbar-header"
+    initial={{ opacity: 0, y: -25 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    <div className="nav-brand" onClick={unloadProject}>
+      <div className="brand-logo-icon">NM</div>
+      <div className="brand-text-wrap">
+        <span className="brand-title">NITHYA MART</span>
+      </div>
+    </div>
+
+    <div className="nav-actions">
+      <nav className="nav-pills">
+        <button
+          className={`nav-pill-btn ${activeProject === null ? "active" : ""}`}
+          onClick={unloadProject}
+        >
+          Dashboard
+        </button>
+
+        {projects.map((proj) => (
+          <button
+            key={proj.id}
+            className={`nav-pill-btn ${
+              activeProject?.id === proj.id ? "active" : ""
+            }`}
+            onClick={() => loadProject(proj)}
+          >
+            {proj.name.split(" ")[0]}
+          </button>
+        ))}
+      </nav>
+
+      <button
+        className="theme-toggle-btn"
+        onClick={toggleDarkMode}
+      >
+        {darkMode ? "☀️" : "🌙"}
+      </button>
+    </div>
+  </motion.header>
+)}
 
       {/* Main Workspace */}
       {activeProject === null ? (
@@ -542,22 +588,37 @@ function App() {
           </footer>
         </main>
       ) : (
-        /* Active Submodule Iframe Viewport */
-        <div className="viewport-shell">
-          {iframeLoading && (
-            <div className="iframe-loader-overlay">
-              <div className="loader-spinner" />
-              <p>Loading {activeProject.name}...</p>
-            </div>
-          )}
-          <iframe
-            src={activeProject.path}
-            title={activeProject.name}
-            className={`viewport-frame ${!iframeLoading ? 'loaded' : ''}`}
-            onLoad={handleIframeLoad}
-          />
+  <>
+    {/* Floating Back Button */}
+    <button
+      className="back-btn"
+      onClick={() => {
+        setIframeLoading(true);
+        setActiveProject(null);
+      }}
+    >
+      ← Back to Dashboard
+    </button>
+
+    {/* Active Project */}
+    <div className="viewport-shell">
+      {iframeLoading && (
+        <div className="iframe-loader-overlay">
+          <div className="loader-spinner" />
+          <p>Loading {activeProject.name}...</p>
         </div>
       )}
+
+      <iframe
+        key={activeProject.id}
+        src={activeProject.path}
+        title={activeProject.name}
+        className={`viewport-frame ${!iframeLoading ? "loaded" : ""}`}
+        onLoad={handleIframeLoad}
+      />
+    </div>
+  </>
+)}
     </div>
   );
 }
