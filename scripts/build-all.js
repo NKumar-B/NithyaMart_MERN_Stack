@@ -8,18 +8,18 @@ const __dirname = path.dirname(__filename);
 
 const ROOT = path.resolve(__dirname, "..");
 
-const projects = [
-  "BAG",
-  "BOOK",
-  "CHOCOLATES",
-  "COSTUMES",
-  "FRAGRANCE",
-  "Foood",
-  "IceCreams",
-  "SPORTS",
-  "Shoes",
-  "TICKETBOOKING"
-];
+const projectDirs = {
+  BAG: "BAG",
+  BOOK: "BOOK",
+  CHOCOLATES: "CHOCOLATES",
+  COSTUMES: "COSTUMES",
+  FRAGRANCE: "FRAGRANCE",
+  Foood: "Foood/Foood",
+  IceCreams: "IceCreams/client",
+  SPORTS: "SPORTS",
+  Shoes: "Shoes",
+  TICKETBOOKING: "TICKETBOOKING"
+};
 
 function copyDirectory(source, destination) {
   fs.mkdirSync(destination, { recursive: true });
@@ -36,16 +36,17 @@ function copyDirectory(source, destination) {
   }
 }
 
-function buildProject(project) {
-  const projectDir = path.join(ROOT, project);
+function buildProject(projectName) {
+  const relativePath = projectDirs[projectName] || projectName;
+  const projectDir = path.join(ROOT, relativePath);
 
   if (!fs.existsSync(projectDir)) {
-    console.log(`❌ ${project} folder not found`);
+    console.log(`❌ ${projectName} folder not found at ${projectDir}`);
     return;
   }
 
   console.log("\n=======================================");
-  console.log(`🚀 Building ${project}`);
+  console.log(`🚀 Building ${projectName} (${relativePath})`);
   console.log("=======================================\n");
 
   execSync("npm install", {
@@ -61,10 +62,10 @@ function buildProject(project) {
   const dist = path.join(projectDir, "dist");
 
   if (!fs.existsSync(dist)) {
-    throw new Error(`${project} build failed. dist folder not found.`);
+    throw new Error(`${projectName} build failed. dist folder not found.`);
   }
 
-  const target = path.join(ROOT, "public", project);
+  const target = path.join(ROOT, "public", projectName);
 
   if (fs.existsSync(target)) {
     fs.rmSync(target, {
@@ -75,7 +76,7 @@ function buildProject(project) {
 
   copyDirectory(dist, target);
 
-  console.log(`✅ Copied ${project} → public/${project}`);
+  console.log(`✅ Copied ${projectName} → public/${projectName}`);
 }
 
 console.clear();
@@ -84,7 +85,7 @@ console.log("=======================================");
 console.log(" NITHYA MART MULTI PROJECT BUILD");
 console.log("=======================================\n");
 
-for (const project of projects) {
+for (const project of Object.keys(projectDirs)) {
   buildProject(project);
 }
 

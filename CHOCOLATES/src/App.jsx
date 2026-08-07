@@ -2,7 +2,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import CartPage from "./pages/CartPage";
-import Shop from "./pages/Shop";
+import Shop from "./pages/shop";
 import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
