@@ -64,6 +64,10 @@ app.listen(PORT, () => {
 // Serve React build
 app.use(express.static(path.join(__dirname, "../dist")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../dist/index.html"));
+app.use((req, res) => {
+  if (!req.path.startsWith("/api")) {
+    return res.sendFile(path.join(__dirname, "../dist/index.html"));
+  }
+
+  res.status(404).json({ message: "API route not found" });
 });
