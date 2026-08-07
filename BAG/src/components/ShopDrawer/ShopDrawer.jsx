@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import "./ShopDrawer.css";
 
 function ShopDrawer({ type, items, count, onClose }) {
+  const navigate = useNavigate();
+
   if (!type) {
     return null;
   }
@@ -43,7 +46,7 @@ function ShopDrawer({ type, items, count, onClose }) {
                 <p className="item-brand">{item.brand}</p>
               </div>
               <div className="item-price">
-                <span>${item.price}</span>
+                <span>₹{item.price}</span>
                 <small>{item.discount}% OFF</small>
               </div>
             </article>
@@ -52,6 +55,21 @@ function ShopDrawer({ type, items, count, onClose }) {
           <p className="drawer-empty">{emptyText}</p>
         )}
       </div>
+
+      {type === "cart" && items.length > 0 && (
+        <div className="drawer-footer">
+          <button
+            type="button"
+            className="drawer-checkout-btn"
+            onClick={() => {
+              onClose();
+              navigate("/checkout");
+            }}
+          >
+            Buy Now
+          </button>
+        </div>
+      )}
     </aside>
   );
 }

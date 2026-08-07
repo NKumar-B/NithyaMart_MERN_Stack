@@ -12,9 +12,18 @@ async function handle(res) {
 export const api = {
   getProducts: (params = {}) => {
     const qs = new URLSearchParams(params).toString()
-    return fetch(`${API_URL}/products${qs ? `?${qs}` : ''}`).then(handle)
+    return fetch(`${API_URL}/products${qs ? `?${qs}` : ''}`)
+      .then(handle)
+      .then((res) => {
+        if (Array.isArray(res)) return res;
+        if (res && Array.isArray(res.data)) return res.data;
+        return [];
+      })
   },
-  getProduct: (id) => fetch(`${API_URL}/products/${id}`).then(handle),
+  getProduct: (id) => 
+    fetch(`${API_URL}/products/${id}`)
+      .then(handle)
+      .then((res) => (res && res.data ? res.data : res)),
   createOrder: (order) =>
     fetch(`${API_URL}/orders`, {
       method: 'POST',

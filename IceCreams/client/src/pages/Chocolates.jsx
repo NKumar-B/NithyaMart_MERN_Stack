@@ -10,14 +10,18 @@ export default function Chocolates() {
 
   useEffect(() => {
     api.getProducts({ category: 'Chocolate' })
-      .then((data) => { setChocolates(data); setStatus('ready') })
+      .then((data) => {
+        setChocolates(Array.isArray(data) ? data : [])
+        setStatus('ready')
+      })
       .catch(() => setStatus('error'))
   }, [])
 
   const filtered = useMemo(() => {
-    if (!query) return chocolates
+    const list = Array.isArray(chocolates) ? chocolates : []
+    if (!query) return list
     const q = query.toLowerCase()
-    return chocolates.filter((p) => p.name.toLowerCase().includes(q) || (p.group || '').toLowerCase().includes(q))
+    return list.filter((p) => p.name.toLowerCase().includes(q) || (p.group || '').toLowerCase().includes(q))
   }, [query, chocolates])
 
   return (
@@ -40,7 +44,7 @@ export default function Chocolates() {
         )}
         {status === 'ready' && filtered.length > 0 && (
           <div className="grid grid-4 listing-page">
-            {filtered.map((p) => <ProductCard key={p._id} product={p} />)}
+            {filtered.map((p) => <ProductCard key={p._id || p.name} product={p} />)}
           </div>
         )}
       </div>

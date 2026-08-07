@@ -16,6 +16,14 @@ function resolveImagePath(path) {
 function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message) => {
+    setToast(message);
+    setTimeout(() => {
+      setToast(null);
+    }, 3000);
+  };
 
   const perfumes = [
     {
@@ -183,12 +191,14 @@ function App() {
     setCart((prev) => {
       const exists = prev.find((item) => item.name === product.name);
       if (exists) {
+        showToast(`Increased quantity of "${product.name}" in cart! 🌸`);
         return prev.map((item) =>
           item.name === product.name
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
+      showToast(`Added "${product.name}" to cart successfully! 🎉`);
       return [...prev, { ...product, quantity: 1 }];
     });
   };
@@ -205,7 +215,7 @@ function App() {
   };
 
   const handleCheckout = () => {
-    alert("Thank you for shopping at Fragrance Hub! Your checkout is successful. 🎉");
+    showToast("Thank you for shopping at Fragrance Hub! Your checkout is successful. 🎉");
     setCart([]);
     setIsCartOpen(false);
   };
@@ -305,6 +315,11 @@ function App() {
       )}
 
       <Footer />
+      {toast && (
+        <div className="toast-notification">
+          {toast}
+        </div>
+      )}
     </>
   );
 }

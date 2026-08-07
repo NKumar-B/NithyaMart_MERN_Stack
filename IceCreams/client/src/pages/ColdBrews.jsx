@@ -8,7 +8,10 @@ export default function ColdBrews() {
 
   useEffect(() => {
     api.getProducts({ category: 'Cold Brew' })
-      .then((data) => { setColdBrews(data); setStatus('ready') })
+      .then((data) => {
+        setColdBrews(Array.isArray(data) ? data : [])
+        setStatus('ready')
+      })
       .catch(() => setStatus('error'))
   }, [])
 
@@ -23,9 +26,12 @@ export default function ColdBrews() {
 
         {status === 'loading' && <div className="empty-state card"><p>Loading cold brews…</p></div>}
         {status === 'error' && <div className="empty-state card"><p>Couldn't reach the server. Is the API running?</p></div>}
-        {status === 'ready' && (
+        {status === 'ready' && coldBrews.length === 0 && (
+          <div className="empty-state card"><p>No cold brews available right now.</p></div>
+        )}
+        {status === 'ready' && coldBrews.length > 0 && (
           <div className="grid grid-4 listing-page">
-            {coldBrews.map((p) => <ProductCard key={p._id} product={p} />)}
+            {coldBrews.map((p) => <ProductCard key={p._id || p.name} product={p} />)}
           </div>
         )}
       </div>

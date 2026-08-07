@@ -40,7 +40,7 @@ function ProductCard({
   };
 
   const handleQuickView = () => {
-    window.alert(`${item.name} by ${item.brand}\nPrice: $${item.price} - ${item.discount}% off\nA luxury pick for your collection.`);
+    window.alert(`${item.name} by ${item.brand}\nPrice: ₹${item.price} - ${item.discount}% off\nA luxury pick for your collection.`);
   };
 
   return (
@@ -87,7 +87,7 @@ function ProductCard({
         <div className="price-section">
 
           <span className="product-price">
-            ${item.price}
+            ₹{item.price}
           </span>
 
           <span className="product-discount">

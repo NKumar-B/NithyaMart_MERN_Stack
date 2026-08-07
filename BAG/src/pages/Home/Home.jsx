@@ -6,6 +6,7 @@ import LuxuryBrands from "../../components/LuxuryBrands/LuxuryBrands";
 import NewArrivals from "../../components/NewArrivals/NewArrivals";
 import SectionTitle from "../../components/UI/SectionTitle/SectionTitle";
 import storeBagImage from "../../assets/products/luxury.jpg";
+import Footer from "../../components/Footer/Footer";
 import "./Home.css";
 
 
@@ -36,11 +37,11 @@ function Home() {
               </article>
               <article className="offer-card">
                 <h3>Free Express Shipping</h3>
-                <p>Enjoy free delivery on orders over $150.</p>
+                <p>Enjoy free delivery on orders over ₹12,000.</p>
               </article>
               <article className="offer-card">
                 <h3>Bundle Gift Set</h3>
-                <p>Get a free wallet with every purchase above $200.</p>
+                <p>Get a free wallet with every purchase above ₹16,000.</p>
               </article>
             </div>
           </div>
@@ -170,6 +171,8 @@ function Home() {
         </section>
 
       </main>
+
+      <Footer />
 
     </>
 

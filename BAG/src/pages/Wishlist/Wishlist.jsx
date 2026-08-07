@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import SectionTitle from "../../components/UI/SectionTitle/SectionTitle";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 import { useShop } from "../../context/ShopContext";
 import "./Wishlist.css";
 
@@ -12,7 +14,9 @@ function Wishlist() {
   };
 
   return (
-    <main className="wishlist-page">
+    <>
+      <Navbar />
+      <main className="wishlist-page">
       <div className="container">
         <SectionTitle subtitle="Saved Picks" title="Your Wishlist" />
 
@@ -37,7 +41,7 @@ function Wishlist() {
                   <h3>{item.name}</h3>
                   <p className="wishlist-brand">{item.brand}</p>
                   <div className="wishlist-meta">
-                    <span>${item.price}</span>
+                    <span>₹{item.price}</span>
                     <small>{item.discount}% OFF</small>
                   </div>
                   <div className="wishlist-actions">
@@ -63,6 +67,8 @@ function Wishlist() {
         )}
       </div>
     </main>
+      <Footer />
+    </>
   );
 }
 

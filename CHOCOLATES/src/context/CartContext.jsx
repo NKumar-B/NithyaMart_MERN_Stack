@@ -4,6 +4,14 @@ export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message) => {
+    setToast(message);
+    setTimeout(() => {
+      setToast(null);
+    }, 3000);
+  };
 
   const addToCart = (product) => {
     const existingProduct = cartItems.find(
@@ -28,8 +36,12 @@ const CartProvider = ({ children }) => {
       ]);
     }
 
-    // Success Message
-    alert("🍫 Chocolate added to cart successfully!");
+    // Success Message Popup
+    showToast("🍫 Chocolate added to cart successfully! 🎉");
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
   };
 
   return (
@@ -37,9 +49,16 @@ const CartProvider = ({ children }) => {
       value={{
         cartItems,
         addToCart,
+        clearCart,
+        showToast,
       }}
     >
       {children}
+      {toast && (
+        <div className="toast-notification">
+          {toast}
+        </div>
+      )}
     </CartContext.Provider>
   );
 };

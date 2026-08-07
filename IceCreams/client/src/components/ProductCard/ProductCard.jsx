@@ -4,17 +4,29 @@ import { useWishlist } from '../../context/WishlistContext.jsx'
 import { useCart } from '../../context/CartContext.jsx'
 import './ProductCard.css'
 
+const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=600&q=80'
+
 export default function ProductCard({ product }) {
   const { toggleWishlist, isWishlisted } = useWishlist()
   const { addToCart } = useCart()
   const [quickView, setQuickView] = useState(false)
   const wished = isWishlisted(product._id)
 
+  const imgSrc = product.image && product.image.startsWith('http') ? product.image : DEFAULT_IMAGE
+
   return (
     <>
       <div className="product-card card">
         <div className="product-media">
-          <img src={product.image} alt={product.name} loading="lazy" />
+          <img 
+            src={imgSrc} 
+            alt={product.name} 
+            loading="lazy" 
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = DEFAULT_IMAGE;
+            }}
+          />
           {product.serves && <span className="badge badge-gold product-serves">{product.serves}</span>}
           <button
             className={`product-fav ${wished ? 'active' : ''}`}
@@ -43,7 +55,14 @@ export default function ProductCard({ product }) {
       {quickView && (
         <div className="quickview-overlay" onClick={() => setQuickView(false)}>
           <div className="quickview-modal" onClick={(e) => e.stopPropagation()}>
-            <img src={product.image} alt={product.name} />
+            <img 
+              src={imgSrc} 
+              alt={product.name}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = DEFAULT_IMAGE;
+              }}
+            />
             <div className="quickview-body">
               <span className="product-category-tag">{product.category}{product.serves ? ` · ${product.serves}` : ''}</span>
               <h3>{product.name}</h3>

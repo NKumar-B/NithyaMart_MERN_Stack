@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import App from './App.jsx'
 import { WishlistProvider } from './context/WishlistContext.jsx'
 import { CartProvider } from './context/CartContext.jsx'
@@ -13,12 +13,12 @@ const routerFuture = {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter future={routerFuture}>
+    <HashRouter future={routerFuture}>
       <WishlistProvider>
         <CartProvider>
           <App />
         </CartProvider>
       </WishlistProvider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>,
 )

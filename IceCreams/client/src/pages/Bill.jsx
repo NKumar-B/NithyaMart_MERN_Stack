@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { QRCodeSVG } from 'qrcode.react'
+import QRCode from 'react-qr-code'
 import { FiCheckCircle, FiSmartphone, FiDollarSign } from 'react-icons/fi'
 import { useCart } from '../context/CartContext.jsx'
 import { api } from '../api.js'
+
+const QRCodeComp = typeof QRCode === 'function' ? QRCode : (QRCode && QRCode.default ? QRCode.default : QRCode);
 
 // Merchant UPI details for the billing QR code.
 const UPI_ID = '7816096147@naviaxis'
@@ -126,8 +128,26 @@ export default function Bill() {
             {method === 'upi' && (
               <>
                 <h3>Scan &amp; Pay</h3>
-                <div className="qr-code-wrap">
-                  <QRCodeSVG value={buildUpiLink(grandTotal)} size={220} bgColor="#FFFCF5" fgColor="#34241A" />
+                <div
+                  className="qr-code-wrap"
+                  style={{
+                    background: "#FFFCF5",
+                    padding: "16px",
+                    display: "inline-block",
+                    borderRadius: "8px",
+                    margin: "16px 0",
+                  }}
+                >
+                  {QRCodeComp ? (
+                    <QRCodeComp
+                      value={buildUpiLink(grandTotal)}
+                      size={220}
+                      style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                      viewBox={`0 0 256 256`}
+                    />
+                  ) : (
+                    <p>Unable to load QR Code</p>
+                  )}
                 </div>
                 <p className="qr-amount">₹{grandTotal}</p>
                 <p className="qr-payee">{PAYEE_NAME} · {UPI_ID}</p>

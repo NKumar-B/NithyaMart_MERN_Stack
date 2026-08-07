@@ -116,3 +116,27 @@
   line-height:1.6;
   color:#ddd;
 }
+
+.drawer-footer {
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.drawer-checkout-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: center;
+}
+
+.drawer-checkout-btn:hover {
+  background: #9026e0;
+}

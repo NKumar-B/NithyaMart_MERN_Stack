@@ -22,7 +22,17 @@ function Hero() {
           </p>
 
           <div className="hero-buttons">
-            <a href="#categories" className="outline-btn">
+            <a
+              href="#categories"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById("categories");
+                if (target) {
+                  target.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }}
+              className="outline-btn"
+            >
               Explore Collection
             </a>
           </div>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo } from 'react';
 
 const BookStoreContext = createContext();
 
@@ -9,7 +9,7 @@ export const BOOKS_DATA = [
     author: "James Clear",
     price: 499,
     originalPrice: 699,
-    image: "https://picsum.photos/seed/atomichabits/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg",
     category: "Self Help",
     rating: 4.8,
     description: "No matter your goals, Atomic Habits offers a proven framework for improving every day. Learn how tiny changes can lead to remarkable results.",
@@ -23,7 +23,7 @@ export const BOOKS_DATA = [
     author: "J.K. Rowling",
     price: 699,
     originalPrice: 899,
-    image: "https://picsum.photos/seed/harrypotter/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9780590353403-L.jpg",
     category: "Fiction",
     rating: 4.9,
     description: "The first book in the legendary Harry Potter series. Follow young Harry as he discovers he's a wizard and begins his journey at Hogwarts.",
@@ -37,7 +37,7 @@ export const BOOKS_DATA = [
     author: "Héctor García",
     price: 299,
     originalPrice: 499,
-    image: "https://picsum.photos/seed/ikigai/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9780143130727-L.jpg",
     category: "Self Help",
     rating: 4.6,
     description: "Discover the Japanese concept of ikigai—a reason for living. Find joy, purpose, and balance in your daily life with these timeless wisdom teachings.",
@@ -51,7 +51,7 @@ export const BOOKS_DATA = [
     author: "Robert Kiyosaki",
     price: 350,
     originalPrice: 550,
-    image: "https://picsum.photos/seed/richdad/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg",
     category: "Finance",
     rating: 4.7,
     description: "What the rich teach their kids about money that the poor and middle class do not. A classic personal finance book that changes mindsets.",
@@ -65,7 +65,7 @@ export const BOOKS_DATA = [
     author: "Paulo Coelho",
     price: 399,
     originalPrice: 599,
-    image: "https://picsum.photos/seed/alchemist/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9780062315007-L.jpg",
     category: "Fiction",
     rating: 4.8,
     description: "A mystical story about a young shepherd named Santiago who travels from Spain to Egypt in search of treasure buried near the Pyramids.",
@@ -79,7 +79,7 @@ export const BOOKS_DATA = [
     author: "Napoleon Hill",
     price: 450,
     originalPrice: 650,
-    image: "https://picsum.photos/seed/thinkgrow/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9781593302009-L.jpg",
     category: "Finance",
     rating: 4.5,
     description: "The classic money-making book. Napoleon Hill reveals the secret to wealth that made Henry Ford, Thomas Edison, and other tycoons successful.",
@@ -93,7 +93,7 @@ export const BOOKS_DATA = [
     author: "Morgan Housel",
     price: 550,
     originalPrice: 750,
-    image: "https://picsum.photos/seed/psychologymoney/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9780857197689-L.jpg",
     category: "Finance",
     rating: 4.9,
     description: "Timeless lessons on wealth, greed, and happiness. This book explores the strange ways people think about money and teaches you how to make better financial decisions.",
@@ -107,7 +107,7 @@ export const BOOKS_DATA = [
     author: "Cal Newport",
     price: 480,
     originalPrice: 680,
-    image: "https://picsum.photos/seed/deepwork/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9781455586691-L.jpg",
     category: "Self Help",
     rating: 4.7,
     description: "Rules for focused success in a distracted world. Learn how to cultivate deep focus and produce high-quality work in our increasingly distracted world.",
@@ -121,7 +121,7 @@ export const BOOKS_DATA = [
     author: "J.R.R. Tolkien",
     price: 620,
     originalPrice: 820,
-    image: "https://picsum.photos/seed/hobbit/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9780345339683-L.jpg",
     category: "Fiction",
     rating: 4.8,
     description: "The classic prelude to The Lord of the Rings. Follow Bilbo Baggins on an unexpected journey with a company of dwarves to reclaim their mountain home.",
@@ -135,7 +135,7 @@ export const BOOKS_DATA = [
     author: "Benjamin Graham",
     price: 599,
     originalPrice: 899,
-    image: "https://picsum.photos/seed/intelligentinvestor/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9780060555665-L.jpg",
     category: "Finance",
     rating: 4.6,
     description: "The definitive book on value investing. Warren Buffett's favorite investing book, providing timeless strategies for long-term investing success.",
@@ -149,7 +149,7 @@ export const BOOKS_DATA = [
     author: "Gail Honeyman",
     price: 349,
     originalPrice: 549,
-    image: "https://picsum.photos/seed/eleanor/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9780735220683-L.jpg",
     category: "Fiction",
     rating: 4.5,
     description: "A warm, funny, and uplifting novel about a socially awkward woman who learns the importance of friendship and human connection.",
@@ -163,7 +163,7 @@ export const BOOKS_DATA = [
     author: "Stephen R. Covey",
     price: 420,
     originalPrice: 620,
-    image: "https://picsum.photos/seed/7habits/300/400",
+    image: "https://covers.openlibrary.org/b/isbn/9781982137205-L.jpg",
     category: "Self Help",
     rating: 4.7,
     description: "A holistic, principle-centered approach for solving personal and professional problems. One of the most influential self-help books ever written.",
@@ -192,6 +192,24 @@ export function BookStoreProvider({ children }) {
   });
 
   const [appliedCoupon, setAppliedCoupon] = useState(null);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message) => {
+    setToast(message);
+    setTimeout(() => {
+      setToast(null);
+    }, 3000);
+  };
+
+  const uniqueBooks = useMemo(() => {
+    const seen = new Set();
+    return BOOKS_DATA.filter(book => {
+      const isDuplicate = seen.has(book.id) || seen.has(book.title.toLowerCase());
+      seen.add(book.id);
+      seen.add(book.title.toLowerCase());
+      return !isDuplicate;
+    });
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('bookstore_cart', JSON.stringify(cart));
@@ -205,12 +223,14 @@ export function BookStoreProvider({ children }) {
     setCart(prev => {
       const existing = prev.find(item => item.id === book.id);
       if (existing) {
+        showToast(`Increased quantity of "${book.title}" in cart! 📚`);
         return prev.map(item =>
           item.id === book.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
+      showToast(`Added "${book.title}" to cart successfully! 🎉`);
       return [...prev, { ...book, quantity: 1 }];
     });
   };
@@ -282,7 +302,7 @@ export function BookStoreProvider({ children }) {
   return (
     <BookStoreContext.Provider
       value={{
-        books: BOOKS_DATA,
+        books: uniqueBooks,
         coupons: COUPONS,
         cart,
         wishlist,
@@ -303,6 +323,11 @@ export function BookStoreProvider({ children }) {
       }}
     >
       {children}
+      {toast && (
+        <div className="toast-notification">
+          {toast}
+        </div>
+      )}
     </BookStoreContext.Provider>
   );
 }

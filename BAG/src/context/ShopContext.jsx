@@ -56,6 +56,10 @@ export function ShopProvider({ children }) {
     });
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const value = useMemo(
     () => ({
       wishlist,
@@ -66,6 +70,7 @@ export function ShopProvider({ children }) {
       addToCart,
       removeFromWishlist,
       removeFromCart,
+      clearCart,
     }),
     [wishlist, cart, wishlistCount, cartCount]
   );
