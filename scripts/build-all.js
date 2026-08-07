@@ -13,11 +13,11 @@ const projects = [
   "BOOK",
   "CHOCOLATES",
   "COSTUMES",
-  "FOOD",
   "FRAGRANCE",
-  "ICECREAMS",
-  "SHOES",
+  "Foood",
+  "IceCreams",
   "SPORTS",
+  "Shoes",
   "TICKETBOOKING"
 ];
 
