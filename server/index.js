@@ -60,3 +60,10 @@ app.listen(PORT, () => {
   console.log(`  Health Check: http://localhost:${PORT}/api/health`);
   console.log(`==================================================\n`);
 });
+
+// Serve React build
+app.use(express.static(path.join(__dirname, "../dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
