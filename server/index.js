@@ -125,14 +125,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", apiRouter);
 
 // ======================================================
-// Serve React Production Build
+// Serve React Production Build & Submodule Static Assets
 // ======================================================
 const distPath = path.join(__dirname, "../dist");
+const publicPath = path.join(__dirname, "../public");
 
+app.use(express.static(publicPath));
 app.use(express.static(distPath));
 
 // Catch all NON-API routes and serve React
-app.get("/{*any}", (req, res) => {
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api")) {
+    return next();
+  }
   res.sendFile(path.join(distPath, "index.html"));
 });
 

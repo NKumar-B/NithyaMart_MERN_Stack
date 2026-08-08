@@ -65,7 +65,7 @@ const projects = [
   {
     id: 'food',
     name: 'BiteCourt FOOD',
-    path: '/Foood/Foood/index.html',
+    path: '/Foood/index.html',
     icon: '🍔',
     theme: 'theme-food',
     category: 'Food Court',
@@ -77,7 +77,7 @@ const projects = [
   {
     id: 'icecream',
     name: 'ICECREAMS Parlour',
-    path: '/IceCreams/client/index.html',
+    path: '/IceCreams/index.html',
     icon: '🍦',
     theme: 'theme-icecream',
     category: 'Desserts',

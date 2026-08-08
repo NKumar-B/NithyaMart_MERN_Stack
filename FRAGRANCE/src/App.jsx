@@ -7,8 +7,8 @@ import "./App.css";
 
 function resolveImagePath(path) {
   if (!path) return "";
-  if (window.location.pathname.includes("/FRAGRANCE/")) {
-    return `/FRAGRANCE/public${path}`;
+  if (path.startsWith("/")) {
+    return `.${path}`;
   }
   return path;
 }
