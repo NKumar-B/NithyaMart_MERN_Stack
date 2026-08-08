@@ -13,9 +13,9 @@
 
 ##  Live Deployment & Gateway Links
 
-* ** Central Hub Live Web App**: [https://nithyamart-mern-stack.onrender.com](https://nithyamart-mern-stack.onrender.com)
-* ** Backend API Gateway**: `http://localhost:5000/api`
-* ** Health Check Endpoint**: `/api/health`
+* Central Hub Live Web App: [https://nithyamart-mern-stack.onrender.com](https://nithyamart-mern-stack.onrender.com)
+* Backend API Gateway: `http://localhost:5000/api`
+* Health Check Endpoint: `/api/health`
 
 ---
 
