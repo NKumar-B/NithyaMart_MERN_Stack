@@ -133,8 +133,8 @@ const publicPath = path.join(__dirname, "../public");
 app.use(express.static(publicPath));
 app.use(express.static(distPath));
 
-// Catch all NON-API routes and serve React
-app.get("*", (req, res, next) => {
+// Catch-all SPA fallback middleware for React routing
+app.use((req, res, next) => {
   if (req.path.startsWith("/api")) {
     return next();
   }
