@@ -1,12 +1,5 @@
 #  Nithya Mart — Consolidated MERN Stack Enterprise Hub
 
-![Nithya Mart Banner](https://img.shields.io/badge/Nithya%20Mart-MERN%20Stack%20Hub-22d3ee?style=for-the-badge&logo=react)
-![React Version](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react)
-![Node Version](https://img.shields.io/badge/Node.js-v18%2B-339933?style=for-the-badge&logo=nodedotjs)
-![Express Version](https://img.shields.io/badge/Express-5.x-000000?style=for-the-badge&logo=express)
-![MongoDB Atlas](https://img.shields.io/badge/MongoDB-Atlas%20Cloud-47A248?style=for-the-badge&logo=mongodb)
-![Build Status](https://img.shields.io/badge/Deployment-Render%20%7C%20Vercel-success?style=for-the-badge&logo=render)
-
 > **Nithya Mart** is an all-in-one centralized multi-module e-commerce and utility platform developed by **MERN Stack Team 4**. It unifies **10 specialized sub-applications** under a high-performance React 19 architecture, powered by a central Express REST API backend and connected directly to **MongoDB Atlas Cloud Database**.
 
 ---
