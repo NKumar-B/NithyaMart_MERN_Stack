@@ -1,4 +1,4 @@
-# 🛍️ Nithya Mart — Consolidated MERN Stack Enterprise Hub
+#  Nithya Mart — Consolidated MERN Stack Enterprise Hub
 
 ![Nithya Mart Banner](https://img.shields.io/badge/Nithya%20Mart-MERN%20Stack%20Hub-22d3ee?style=for-the-badge&logo=react)
 ![React Version](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react)
@@ -11,15 +11,15 @@
 
 ---
 
-## 🌐 Live Deployment & Gateway Links
+##  Live Deployment & Gateway Links
 
-* **🚀 Central Hub Live Web App**: [https://nithyamart-mern-stack.onrender.com](https://nithyamart-mern-stack.onrender.com)
-* **📡 Backend API Gateway**: `http://localhost:5000/api`
-* **🔗 Health Check Endpoint**: `/api/health`
+* ** Central Hub Live Web App**: [https://nithyamart-mern-stack.onrender.com](https://nithyamart-mern-stack.onrender.com)
+* ** Backend API Gateway**: `http://localhost:5000/api`
+* ** Health Check Endpoint**: `/api/health`
 
 ---
 
-## 🏛️ System Architecture
+##  System Architecture
 
 Nithya Mart is built as a micro-frontend portal with a consolidated Express API Gateway:
 
@@ -60,7 +60,7 @@ Nithya Mart is built as a micro-frontend portal with a consolidated Express API 
 
 ---
 
-## 📦 Submodules Overview & Catalog
+##  Submodules Overview & Catalog
 
 Nithya Mart includes 10 self-contained, fully featured e-commerce & utility applications:
 
@@ -79,7 +79,7 @@ Nithya Mart includes 10 self-contained, fully featured e-commerce & utility appl
 
 ---
 
-## ⚡ API Gateway Endpoints
+## API Gateway Endpoints
 
 The central Express server (`server/index.js`) provides centralized API services for all applications:
 
@@ -95,7 +95,7 @@ The central Express server (`server/index.js`) provides centralized API services
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 * **Frontend**: React 19, Vite 8, Framer Motion 12, React Router DOM v7, React Icons, CSS3.
 * **Backend**: Node.js, Express 5, Mongoose 9, CORS, Dotenv.
@@ -104,7 +104,7 @@ The central Express server (`server/index.js`) provides centralized API services
 
 ---
 
-## 🚀 Getting Started Locally
+## Getting Started Locally
 
 ### Prerequisites
 - Node.js (v18.0.0 or higher)
@@ -138,7 +138,7 @@ npm start
 
 ---
 
-## 🔨 Automated Multi-Project Build
+## Automated Multi-Project Build
 
 To compile all 10 sub-applications and the main portal into the production `dist/` and `public/` directories:
 
@@ -154,15 +154,15 @@ This automated build script (`scripts/build-all.js`):
 
 ---
 
-## 🤝 Contribution & Team Credits
+## Contribution & Team Credits
 
-Built with ❤️ by **MERN Stack Team 4**:
+Built by **MERN Stack Team 4**:
 
 * **Badduluri Nithin Kumar** — Platform Architect & Lead Developer
 * **Team 4 Contributors** — Specialized E-Commerce Submodule Developers
 
 ---
 
-## 📜 License
+## License
 
 This project is open-source and available under the [MIT License](LICENSE).
