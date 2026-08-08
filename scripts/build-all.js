@@ -41,13 +41,12 @@ function buildProject(projectName) {
   const projectDir = path.join(ROOT, relativePath);
 
   if (!fs.existsSync(projectDir)) {
-    console.log(`❌ ${projectName} folder not found at ${projectDir}`);
+    console.log(` ${projectName} folder not found at ${projectDir}`);
     return;
   }
 
-  console.log("\n=======================================");
-  console.log(`🚀 Building ${projectName} (${relativePath})`);
-  console.log("=======================================\n");
+  console.log(` Building ${projectName} (${relativePath})`);
+ 
 
   execSync("npm install", {
     cwd: projectDir,
@@ -76,28 +75,24 @@ function buildProject(projectName) {
 
   copyDirectory(dist, target);
 
-  console.log(`✅ Copied ${projectName} → public/${projectName}`);
+  console.log(` Copied ${projectName} → public/${projectName}`);
 }
 
 console.clear();
 
-console.log("=======================================");
 console.log(" NITHYA MART MULTI PROJECT BUILD");
-console.log("=======================================\n");
+
 
 for (const project of Object.keys(projectDirs)) {
   buildProject(project);
 }
 
-console.log("\n=======================================");
-console.log("🚀 Building Main Portal");
-console.log("=======================================\n");
+
+console.log(" Building Main Portal");
 
 execSync("npm run build", {
   cwd: ROOT,
   stdio: "inherit",
 });
 
-console.log("\n=======================================");
-console.log("🎉 ALL PROJECTS BUILT SUCCESSFULLY");
-console.log("=======================================\n");
+console.log(" ALL PROJECTS BUILT SUCCESSFULLY");

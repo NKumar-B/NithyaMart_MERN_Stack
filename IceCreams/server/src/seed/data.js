@@ -105,7 +105,7 @@ export function buildSeedProducts() {
     category: 'Ice Cream',
     unit: '125 ml cup',
     description: desc,
-    image: IMG_FLAVOUR + file,
+    image: file.startsWith('http') ? file : IMG_FLAVOUR + file,
     price: estimatePrice(name, i),
     isEstimate: true,
   }))
@@ -115,7 +115,7 @@ export function buildSeedProducts() {
     category: 'Ice Cream Cake',
     serves,
     description: desc,
-    image: IMG_CAKE + file,
+    image: file.startsWith('http') ? file : IMG_CAKE + file,
     price,
     isEstimate: true,
   }))
@@ -125,7 +125,7 @@ export function buildSeedProducts() {
     category: 'Chocolate',
     group,
     description: desc,
-    image: CHOC_IMG + file,
+    image: file.startsWith('http') ? file : CHOC_IMG + file,
     price: 89 + (i % 6) * 15,
     isEstimate: true,
   }))
@@ -134,7 +134,7 @@ export function buildSeedProducts() {
     name,
     category: 'Cold Brew',
     description: desc,
-    image: BREW_IMG + file,
+    image: file.startsWith('http') ? file : BREW_IMG + file,
     price: 129 + i * 10,
     isEstimate: true,
   }))

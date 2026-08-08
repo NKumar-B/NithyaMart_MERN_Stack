@@ -9,12 +9,12 @@ const connectDB = async () => {
       serverSelectionTimeoutMS: 10000,
     });
     
-    console.log(`\n✅ [MongoDB Connected] Host: ${conn.connection.host}`);
-    console.log(`📦 [Database Name]: ${conn.connection.name}`);
-    console.log(`🌐 [Connection Type]: ${isAtlas ? 'MongoDB Atlas (Cloud)' : 'Local MongoDB'}\n`);
+    console.log(`\n [MongoDB Connected] Host: ${conn.connection.host}`);
+    console.log(` [Database Name]: ${conn.connection.name}`);
+    console.log(` [Connection Type]: ${isAtlas ? 'MongoDB Atlas (Cloud)' : 'Local MongoDB'}\n`);
   } catch (error) {
-    console.warn(`\n⚠️  [MongoDB Warning]: Connection failed (${error.message}).`);
-    console.warn(`💡  [Tip]: Ensure your IP address is whitelisted in MongoDB Atlas and your MONGODB_URI in .env is correct.\n`);
+    console.warn(`\n  [MongoDB Warning]: Connection failed (${error.message}).`);
+    console.warn(`  [Tip]: Ensure your IP address is whitelisted in MongoDB Atlas and your MONGODB_URI in .env is correct.\n`);
   }
 };
 
