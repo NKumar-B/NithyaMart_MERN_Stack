@@ -508,7 +508,7 @@ function App() {
           >
             <div className="contact-box">
               <span className="section-badge">SUPPORT & FEEDBACK</span>
-              <h2 className="contact-box-title">Get in Touch with Team 4</h2>
+              <h2 className="contact-box-title">Get in Touch with us</h2>
               <p className="contact-box-subtitle">Have questions or feedback about Nithya Mart? Drop us a message below.</p>
 
               <form className="contact-form-grid" onSubmit={handleContactSubmit}>
